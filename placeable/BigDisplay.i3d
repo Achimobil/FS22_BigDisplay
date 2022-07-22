@@ -50,7 +50,7 @@
   <Scene>
       <TransformGroup name="display" nodeId="9">
         <Shape shapeId="1" name="Cube" rotation="-6.83019e-06 -0 0" static="true" clipDistance="1000" nodeId="10" materialIds="5" castsShadows="true" receiveShadows="true"/>
-        <Shape shapeId="2" name="Plane" translation="-0.0113409 1.76023 0.014176" rotation="90 -0 0" clipDistance="1000" nodeId="11" materialIds="4">
+        <Shape shapeId="2" name="Plane" translation="-0.0113409 1.76 0.014176" rotation="90 -0 0" clipDistance="1000" nodeId="11" materialIds="4" castsShadows="true" receiveShadows="true">
           <TransformGroup name="TextArea" translation="-0.909901 0.14 -1.12801" rotation="-90 -0 0" nodeId="12">
             <TransformGroup name="textNode" nodeId="15"/>
             <TransformGroup name="textNode" nodeId="19"/>
@@ -68,6 +68,22 @@
             <TransformGroup name="textNode" nodeId="31"/>
             <TransformGroup name="textNode" nodeId="32"/>
             <TransformGroup name="textNode" nodeId="33"/>
+            <TransformGroup name="textNode" nodeId="34"/>
+            <TransformGroup name="textNode" nodeId="35"/>
+            <TransformGroup name="textNode" nodeId="36"/>
+            <TransformGroup name="textNode" nodeId="37"/>
+            <TransformGroup name="textNode" nodeId="38"/>
+            <TransformGroup name="textNode" nodeId="39"/>
+            <TransformGroup name="textNode" nodeId="40"/>
+            <TransformGroup name="textNode" nodeId="41"/>
+            <TransformGroup name="textNode" nodeId="42"/>
+            <TransformGroup name="textNode" nodeId="43"/>
+            <TransformGroup name="textNode" nodeId="44"/>
+            <TransformGroup name="textNode" nodeId="45"/>
+            <TransformGroup name="textNode" nodeId="46"/>
+            <TransformGroup name="textNode" nodeId="47"/>
+            <TransformGroup name="textNode" nodeId="48"/>
+            <TransformGroup name="textNode" nodeId="49"/>
           </TransformGroup>
         </Shape>
       </TransformGroup>

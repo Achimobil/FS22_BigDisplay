@@ -81,11 +81,11 @@ function BigDisplaySpecialization:onLoad(savegame)
         local fontName = self.xmlFile:getValue(bigDisplayKey .. "#font", "GENERIC"):upper();
         local fontMaterial = g_materialManager:getFontMaterial(fontName, self.customEnvironment);
 
-        local size = self.xmlFile:getValue(bigDisplayKey .. "#size", 0.13);
+        local size = self.xmlFile:getValue(bigDisplayKey .. "#size", 0.11);
         local scaleX = self.xmlFile:getValue(bigDisplayKey .. "#scaleX", 1);
         local scaleY = self.xmlFile:getValue(bigDisplayKey .. "#scaleY", 1);
         local mask = self.xmlFile:getValue(bigDisplayKey .. "#mask", "000000000000000");
-        local emissiveScale = self.xmlFile:getValue(bigDisplayKey .. "#emissiveScale", 0.6);
+        local emissiveScale = self.xmlFile:getValue(bigDisplayKey .. "#emissiveScale", 0);
         local color = self.xmlFile:getValue(bigDisplayKey .. "#color", {
         0.6,
         0.9,
@@ -115,9 +115,11 @@ function BigDisplaySpecialization:onLoad(savegame)
             display.numberNodeId = numberNodeId;
             display.formatStr, display.formatPrecision = string.maskToFormat(mask);
             display.fontMaterial = fontMaterial;
-            display.textLine = fontMaterial:createCharacterLine(display.textNodeId, mask:len(), size, color, hiddenColor, emissiveScale, scaleX, scaleY, RenderText.ALIGN_LEFT);
-            display.numberLine = fontMaterial:createCharacterLine(display.numberNodeId, mask:len(), size, color, hiddenColor, emissiveScale, scaleX, scaleY, RenderText.ALIGN_RIGHT);
-            table.insert(spec.bigDisplays, display);
+            display.textLine = fontMaterial:createCharacterLine(display.textNodeId, 15, size, color, hiddenColor, emissiveScale, scaleX, scaleY, RenderText.ALIGN_LEFT);
+            display.numberLine = fontMaterial:createCharacterLine(display.numberNodeId, 8, size, color, hiddenColor, emissiveScale, scaleX, scaleY, RenderText.ALIGN_RIGHT);
+            if(lowerToSize <= height) then
+                table.insert(spec.bigDisplays, display);
+            end
             
         end
 
@@ -134,28 +136,104 @@ function BigDisplaySpecialization:onLoad(savegame)
 end
 
 function BigDisplaySpecialization:onFinalizePlacement(savegame)
-  -- local spec = self.spec_bigDisplay;
-  -- for _, sourceStorage in pairs(self.spec_silo.loadingStation:getSourceStorages()) do
-    -- sourceStorage:addFillLevelChangedListeners(spec.fillLevelChangedCallback);
-  -- end
+    local spec = self.spec_bigDisplay;
+    if spec.storageToUse == nil then 
+        return;
+    end
+    
+    -- for _, sourceStorage in pairs(self.spec_silo.loadingStation:getSourceStorages()) do
+        -- spec.storageToUse:addFillLevelChangedListeners(spec.fillLevelChangedCallback);
+    -- end
 end
 
 function BigDisplaySpecialization:onPostFinalizePlacement(savegame)
-  self:updateDisplays();
+    local spec = self.spec_bigDisplay;
+    
+    -- find the storage closest to me
+    local currentStorage = nil;
+    local currentDistance = math.huge;
+    for _, storage in pairs(g_currentMission.storageSystem:getStorages()) do
+        -- entfernung wie messen?
+        local distance = BigDisplaySpecialization:getDistance(storage, self.position.x, self.position.y, self.position.z)
+        if distance < currentDistance then
+            currentDistance = distance;
+            currentStorage = storage;
+        end
+    end
+    
+    -- auch produktionen durchsuchen nach dem richtigen storage, die stehen nicht im storage system
+    local farmId = self:getOwnerFarmId();
+    
+    
+    for index, productionPoint in ipairs(g_currentMission.productionChainManager:getProductionPointsForFarmId(farmId)) do
+        local distance = BigDisplaySpecialization:getDistance(productionPoint.storage, self.position.x, self.position.y, self.position.z)
+        if distance < currentDistance then
+            currentDistance = distance;
+            currentStorage = productionPoint.storage;
+        end
+		
+	end
+    
+    if currentStorage == nil then
+        print("no Storage found");
+        return;
+    end
+
+    spec.storageToUse = currentStorage;
+    self:updateDisplays();
+    
+    spec.storageToUse:addFillLevelChangedListeners(spec.fillLevelChangedCallback);
+end
+
+function BigDisplaySpecialization:getDistance(storage, x, y, z)
+-- print("placable")
+-- DebugUtil.printTableRecursively(placable,"_",0,2)
+	if storage ~= nil then
+		local tx, ty, tz = getWorldTranslation(storage.rootNode)
+
+		return MathUtil.vector3Length(x - tx, y - ty, z - tz)
+	end
+
+	return math.huge
 end
 
 function BigDisplaySpecialization:updateDisplays()
-  local spec = self.spec_bigDisplay;
-
-    local textLine = string.format("%-15s", "Hallo Braeven")
-    spec.bigDisplays[1].fontMaterial:updateCharacterLine(spec.bigDisplays[1].textLine, textLine);
-    local textLine = string.format("%15s", "4812")
-    spec.bigDisplays[1].fontMaterial:updateCharacterLine(spec.bigDisplays[1].numberLine, textLine);
+    local spec = self.spec_bigDisplay;
+    if spec.storageToUse == nil then 
+        return;
+    end
+  
+    local line = 1;
+    for fillTypeId, fillLevel in pairs(spec.storageToUse:getFillLevels()) do
     
-    local textLine = string.format("%-15s", "Hallo Achim")
-    spec.bigDisplays[2].fontMaterial:updateCharacterLine(spec.bigDisplays[2].textLine, textLine);
-    local textLine = string.format("%15s", "4711")
-    spec.bigDisplays[2].fontMaterial:updateCharacterLine(spec.bigDisplays[2].numberLine, textLine);
+        if spec.bigDisplays[line] == nil then
+            return; -- mehr Zeilen haben wir nicht
+        end
+        
+        local fillLevel = Utils.getNoNil(fillLevel, 0);
+        
+        -- if fillLevel >= 1 then
+            local fillType = g_fillTypeManager:getFillTypeByIndex(fillTypeId);
+                        
+            local textLine = string.format("%15s", string.sub(fillType.title, 1, 15))
+            spec.bigDisplays[line].fontMaterial:updateCharacterLine(spec.bigDisplays[line].textLine, textLine);
+            
+            local numberLine = string.format("%8s", g_i18n:formatNumber(fillLevel, 0))
+            spec.bigDisplays[line].fontMaterial:updateCharacterLine(spec.bigDisplays[line].numberLine, numberLine);
+            
+            line = line + 1;
+        -- end
+    end
+
+    -- local textLine = string.format("%-15s", "DiesIstEinVileZuLangerText")
+    -- spec.bigDisplays[1].fontMaterial:updateCharacterLine(spec.bigDisplays[1].textLine, textLine);
+    -- local textLine = string.format("%15s", "4812")
+    -- spec.bigDisplays[1].fontMaterial:updateCharacterLine(spec.bigDisplays[1].numberLine, textLine);
+    
+    -- local textLine = string.format("%-15s", "Hallo Achim")
+    -- spec.bigDisplays[2].fontMaterial:updateCharacterLine(spec.bigDisplays[2].textLine, textLine);
+    -- local textLine = string.format("%15s", "12345678901234567890")
+    -- spec.bigDisplays[2].fontMaterial:updateCharacterLine(spec.bigDisplays[2].numberLine, textLine);
 
   -- local farmId = self:getOwnerFarmId();
     
