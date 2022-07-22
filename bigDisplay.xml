@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<placeable type="bigDisplayType" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../shared/xml/schema/placeable.xsd">
+    <storeData>
+        <name>$l10n_soon</name>
+        <functions>
+            <function>$l10n_function_soon</function>
+        </functions>
+        <image>store/woodStorage.dds</image>
+        <price>50000</price>
+        <lifetime>1000</lifetime>
+        <dailyUpkeep>50</dailyUpkeep>
+        <rotation>0</rotation>
+        <brand>FARMERTOOLS</brand>
+        <species>placeable</species>
+        <category>misc</category>
+        <brush>
+            <type>placeable</type>
+            <category>buildings</category>
+            <tab>tools</tab>
+        </brush>
+    </storeData>
+    
+    <base>
+        <filename>placeable/BigDisplay.i3d</filename>
+        <canBeRenamed>true</canBeRenamed>
+    </base>
+    
+    <bigDisplays>
+        <bigDisplay node="Display"></bigDisplay>
+    </bigDisplays>
+    
+    
+    <!-- <hotspots> -->
+        <!-- <hotspot type="UNLOADING" linkNode="triggerMarker" teleportNode="triggerMarker"/> -->
+    <!-- </hotspots> -->
+    
+    <!-- <clearAreas> -->
+        <!-- <clearArea startNode="clearArea1Start" widthNode="clearArea1Width" heightNode="clearArea1Height"/> -->
+    <!-- </clearAreas> -->
+    
+    <!-- <leveling requireLeveling="true" maxSmoothDistance="10" maxSlope="75" maxEdgeAngle="30"> -->
+        <!-- <levelAreas> -->
+            <!-- <levelArea startNode="levelArea1Start" widthNode="levelArea1Width" heightNode="levelArea1Height" groundType="forestGround"/> -->
+        <!-- </levelAreas> -->
+    <!-- </leveling> -->
+	
+    <!-- <indoorAreas> -->
+        <!-- <indoorArea startNode="indoorArea1Start" widthNode="indoorArea1Width" heightNode="indoorArea1Height"/> -->
+    <!-- </indoorAreas> -->
+	
+    <!-- <tipOcclusionUpdateAreas> -->
+        <!-- <tipOcclusionUpdateArea startNode="tipOcclusionUpdateArea1Start" endNode="tipOcclusionUpdateArea1End"/> -->
+    <!-- </tipOcclusionUpdateAreas> -->
+    
+    <!-- <placement> -->
+        <!-- <testAreas> -->
+            <!-- <testArea startNode="testArea1Start" endNode="testArea1End"/> -->
+        <!-- </testAreas> -->
+        <!-- <sounds> -->
+            <!-- <place template="smallImp"/> -->
+        <!-- </sounds> -->
+    <!-- </placement> -->
+	
+    <!-- <ai> -->
+        <!-- <updateAreas> -->
+            <!-- <updateArea startNode="tipOcclusionUpdateArea1Start" endNode="tipOcclusionUpdateArea1End"/> -->
+        <!-- </updateAreas> -->
+    <!-- </ai> -->
+    
+    <!-- <infoTrigger triggerNode="infoTrigger"/> -->
+    
+    
+    <!-- <triggerMarkers> -->
+		<!-- <triggerMarker node="markerUnloading" filename="$data/shared/assets/marker/markerIcons.xml" id="UNLOAD" /> -->
+        <!-- <triggerMarker node="triggerMarker" filename="markerIcons.xml" id="WORK"/> -->
+        <!-- <triggerMarker node="palletStripes" adjustToGround="false" /> -->
+        <!-- <triggerMarker node="unloadingStripes" adjustToGround="false" /> -->
+        <!-- <triggerMarker node="woodSellTriggerMarker" filename="$data/shared/assets/marker/markerIcons.xml" id="EXCLAMATION_MARK" /> -->
+    <!-- </triggerMarkers> -->
+    
+    <!-- <i3dMappings> -->
+        <!-- <i3dMapping id="storage" node="0>" /> -->
+        <!-- <i3dMapping id="fillPlanes" node="0>1"/> -->
+        <!-- <i3dMapping id="clearArea1Start" node="0>2|0"/> -->
+        <!-- <i3dMapping id="clearArea1Width" node="0>2|0|0"/> -->
+        <!-- <i3dMapping id="clearArea1Height" node="0>2|0|1"/> -->
+        <!-- <i3dMapping id="levelArea1Start" node="0>3|0"/> -->
+        <!-- <i3dMapping id="levelArea1Width" node="0>3|0|0"/> -->
+        <!-- <i3dMapping id="levelArea1Height" node="0>3|0|1"/> -->
+        <!-- <i3dMapping id="palletSpawner" node="0>4"/> -->
+        <!-- <i3dMapping id="palletStripes" node="0>4|0" /> -->
+        <!-- <i3dMapping id="palletSpawnerRight1start" node="0>4|1|0"/> -->
+        <!-- <i3dMapping id="palletSpawnerRight2start" node="0>4|1|1"/> -->
+        <!-- <i3dMapping id="palletSpawnerRight3start" node="0>4|1|2"/> -->
+        <!-- <i3dMapping id="palletSpawnerLeft1start" node="0>4|2|0"/> -->
+        <!-- <i3dMapping id="palletSpawnerLeft2start" node="0>4|2|1"/> -->
+        <!-- <i3dMapping id="palletSpawnerLeft3start" node="0>4|2|2"/> -->
+        <!-- <i3dMapping id="palletMenuTrigger" node="0>5|0"/> -->
+        <!-- <i3dMapping id="infoTrigger" node="0>5|1"/> -->
+        <!-- <i3dMapping id="triggerMarker" node="0>5|2"/> -->
+        <!-- <i3dMapping id="woodSellTrigger" node="0>5|3"/> -->
+        <!-- <i3dMapping id="woodSellTriggerMarker" node="0>5|4"/> -->
+        <!-- <i3dMapping id="exactFillRootNode" node="0>6|0" /> -->
+        <!-- <i3dMapping id="markerUnloading" node="0>6|1" /> -->
+        <!-- <i3dMapping id="unloadingStripes" node="0>6|2" /> -->
+        <!-- <i3dMapping id="woodTrigger" node="0>6|3"/> -->
+		<!-- <i3dMapping id="foliageArea1Start" node="0>7|0" /> -->
+        <!-- <i3dMapping id="foliageArea1Width" node="0>7|0|0" /> -->
+        <!-- <i3dMapping id="foliageArea1Height" node="0>7|0|1" /> -->
+        <!-- <i3dMapping id="Display" node="0>1|2" /> -->
+        <!-- <i3dMapping id="indoorArea1Start" node="0>8|0"/> -->
+        <!-- <i3dMapping id="indoorArea1Width" node="0>8|0|0"/> -->
+        <!-- <i3dMapping id="indoorArea1Height" node="0>8|0|1"/> -->
+        <!-- <i3dMapping id="tipOcclusionUpdateArea1Start" node="0>9|0"/> -->
+        <!-- <i3dMapping id="tipOcclusionUpdateArea1End" node="0>9|0|0"/> -->
+        <!-- <i3dMapping id="testArea1Start" node="0>10|0"/> -->
+        <!-- <i3dMapping id="testArea1End" node="0>10|0|0"/> -->
+    <!-- </i3dMappings> -->
+</placeable>

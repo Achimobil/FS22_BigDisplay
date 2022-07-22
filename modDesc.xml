@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<modDesc descVersion="67">
+    <author>Achimobil</author>
+    <version>0.1.0.0</version>
+    <title>
+        <en>Big Display</en>
+    </title>
+    <description>
+        <en>
+            <![CDATA[soon]]></en>
+        <de>
+            <![CDATA[soon]]></de>
+    </description>
+    <multiplayer supported="true"/>
+    <iconFilename>icon.dds</iconFilename>
+    <storeItems>
+        <storeItem xmlFilename="bigDisplay.xml"/>
+    </storeItems>
+    <brands>
+        <brand name="FARMERTOOLS" title="Farmer Tools" image="store/FarmerTools.dds"/>
+    </brands>
+    
+	<dependencies>
+		<dependency>FS22_A_ProductionRevamp</dependency>
+	</dependencies>
+    
+    <extraSourceFiles>
+		<sourceFile filename="scripts/revamp_check.lua" />
+    </extraSourceFiles>
+    
+    <revamp minVersion="1.2.0.0" />
+
+    <placeableSpecializations>
+        <specialization name="bigDisplay" className="BigDisplaySpecialization" filename="scripts/bigDisplaySpecialization.lua"/>
+    </placeableSpecializations>
+    
+    <placeableTypes>
+        <type name="bigDisplayType" parent="simplePlaceable" filename="$dataS/scripts/placeables/Placeable.lua">
+            <specialization name="bigDisplay"/>
+        </type>
+    </placeableTypes>
+</modDesc>

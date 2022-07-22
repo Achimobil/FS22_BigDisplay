@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="BigDisplay" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="9.0.3"/>
+  </Asset>
+
+  <Files>
+    <File fileId="3" filename="$data/shaders/vehicleShader.xml"/>
+    <File fileId="7" filename="$data/shared/clearPlastic_diffuse.dds"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="displayglas_mat" materialId="5" specularColor="0.494118 1 0" alphaBlending="true" customShaderId="3" customShaderVariation="colorMask">
+      <Texture fileId="7"/>
+      <CustomParameter name="RDT" value="0 0 0 0"/>
+      <CustomParameter name="dirtColor" value="0.2 0.14 0.08 0"/>
+      <CustomParameter name="colorMat0" value="0.8 0.55 0.05 1"/>
+      <CustomParameter name="colorMat1" value="0 0 0 2"/>
+      <CustomParameter name="colorMat2" value="0.1 1 0.1 1"/>
+      <CustomParameter name="colorMat3" value="0.1 0.1 1 1"/>
+      <CustomParameter name="colorMat4" value="1 1 0.1 1"/>
+      <CustomParameter name="colorMat5" value="0.05 0.05 0.05 1"/>
+      <CustomParameter name="colorMat6" value="1 0.1 1 1"/>
+      <CustomParameter name="colorMat7" value="0.1 1 1 1"/>
+    </Material>
+    <Material name="Plastik_mat" materialId="6" diffuseColor="0.8 0.8 0.8 1" specularColor="0.494118 1 0" customShaderId="3" customShaderVariation="colorMask">
+      <CustomParameter name="RDT" value="0 0 0 0"/>
+      <CustomParameter name="dirtColor" value="0.2 0.14 0.08 0"/>
+      <CustomParameter name="colorMat0" value="0.8 0.8 0.8 1"/>
+      <CustomParameter name="colorMat1" value="1 0.1 0.1 1"/>
+      <CustomParameter name="colorMat2" value="0.1 1 0.1 1"/>
+      <CustomParameter name="colorMat3" value="0.1 0.1 1 1"/>
+      <CustomParameter name="colorMat4" value="1 1 0.1 1"/>
+      <CustomParameter name="colorMat5" value="0.05 0.05 0.05 1"/>
+      <CustomParameter name="colorMat6" value="1 0.1 1 1"/>
+      <CustomParameter name="colorMat7" value="0.1 1 1 1"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="BigDisplay.i3d.shapes">
+  </Shapes>
+
+
+  <Dynamics>
+  </Dynamics>
+
+  <Scene>
+      <TransformGroup name="display" nodeId="17">
+        <Shape shapeId="1" name="Cube" rotation="-6.83019e-06 -0 0" nodeId="11" materialIds="6"/>
+        <Shape shapeId="2" name="Plane" translation="-0.0113409 1.76023 0.014176" rotation="90 -0 0" nodeId="13" materialIds="5">
+          <TransformGroup name="TextArea" translation="-0.940915 0.0557046 -1.15698" rotation="-90 -0 0" nodeId="18">
+            <TransformGroup name="textAreaStart" translation="0.0263503 0 0" nodeId="21">
+              <TransformGroup name="textAreaEnd" translation="1.84794 -2.22738 0" nodeId="22"/>
+            </TransformGroup>
+            <TransformGroup name="text1" translation="0.0982007 -0.324295 0" nodeId="19"/>
+            <TransformGroup name="number1" translation="1.07078 -0.326192 0" nodeId="20"/>
+          </TransformGroup>
+        </Shape>
+      </TransformGroup>
+  </Scene>
+
+</i3D>
