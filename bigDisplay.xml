@@ -26,7 +26,7 @@
     </base>
     
     <bigDisplays>
-        <bigDisplay node="Display"></bigDisplay>
+        <bigDisplay upperLeftNode="0>1|0" height="2.0" width="1.85"></bigDisplay>
     </bigDisplays>
     
     
