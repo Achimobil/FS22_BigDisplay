@@ -35,6 +35,7 @@ end
 function BigDisplaySpecialization.registerFunctions(placeableType)
     SpecializationUtil.registerFunction(placeableType, "updateDisplays", BigDisplaySpecialization.updateDisplays);
     SpecializationUtil.registerFunction(placeableType, "updateDisplayData", BigDisplaySpecialization.updateDisplayData);
+    SpecializationUtil.registerFunction(placeableType, "reconnectToStorage", BigDisplaySpecialization.reconnectToStorage);
 end
 
 function BigDisplaySpecialization.registerXMLPaths(schema, basePath)
@@ -131,7 +132,21 @@ function BigDisplaySpecialization:onFinalizePlacement(savegame)
 end
 
 function BigDisplaySpecialization:onPostFinalizePlacement(savegame)
+    table.insert(BigDisplaySpecialization.displays, self);
+    self:reconnectToStorage();
+end
+
+function BigDisplaySpecialization:reconnectToStorage(savegame)
     local spec = self.spec_bigDisplay;
+    
+    if spec.storageToUse ~= nil then 
+        spec.storageToUse:removeFillLevelChangedListeners(spec.fillLevelChangedCallback);
+        spec.storageToUse = nil;
+    end
+    
+    if not self.isClient then 
+        return;
+    end
     
     -- find the storage closest to me
     local currentStorage = nil;
@@ -168,13 +183,12 @@ function BigDisplaySpecialization:onPostFinalizePlacement(savegame)
     
     spec.storageToUse:addFillLevelChangedListeners(spec.fillLevelChangedCallback);
 
-    table.insert(BigDisplaySpecialization.displays, self);
+    -- table.insert(BigDisplaySpecialization.displays, self);
 end
 
 function BigDisplaySpecialization:onDelete()
     table.removeElement(BigDisplaySpecialization.displays, self);
 end
-
 
 function BigDisplaySpecialization:getDistance(storage, x, y, z)
 -- print("placable")
@@ -288,3 +302,11 @@ function BigDisplaySpecialization:update(dt)
 end
 
 addModEventListener(BigDisplaySpecialization)
+
+function BigDisplaySpecialization:onStartMission()
+    -- update faken, muss auch entfernt werden beim löschen, wenn es so klappt
+    for _, display in pairs(BigDisplaySpecialization.displays) do
+        display:reconnectToStorage();
+    end
+end
+Mission00.onStartMission = Utils.appendedFunction(Mission00.onStartMission, BigDisplaySpecialization.onStartMission)
