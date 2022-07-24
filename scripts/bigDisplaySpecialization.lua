@@ -29,10 +29,12 @@ function BigDisplaySpecialization.registerEventListeners(placeableType)
     SpecializationUtil.registerEventListener(placeableType, "onLoad", BigDisplaySpecialization);
     SpecializationUtil.registerEventListener(placeableType, "onFinalizePlacement", BigDisplaySpecialization);
     SpecializationUtil.registerEventListener(placeableType, "onPostFinalizePlacement", BigDisplaySpecialization);
+	SpecializationUtil.registerEventListener(placeableType, "onDelete", BigDisplaySpecialization)
 end
 
 function BigDisplaySpecialization.registerFunctions(placeableType)
     SpecializationUtil.registerFunction(placeableType, "updateDisplays", BigDisplaySpecialization.updateDisplays);
+    SpecializationUtil.registerFunction(placeableType, "updateDisplayData", BigDisplaySpecialization.updateDisplayData);
 end
 
 function BigDisplaySpecialization.registerXMLPaths(schema, basePath)
@@ -52,10 +54,7 @@ function BigDisplaySpecialization:onLoad(savegame)
     self.spec_bigDisplay = {};
     local spec = self.spec_bigDisplay;
     local xmlFile = self.xmlFile;
-
-    -- einfach irgendwas hin schreiben
-
-
+    
     spec.bigDisplays = {};
     local i = 0;
 
@@ -78,39 +77,49 @@ function BigDisplaySpecialization:onLoad(savegame)
         0.0,
         1
         }, true);
-        spec.color = color;
-                
-        -- for 2 childs create one line left and right alligned
-        local numChildren = getNumOfChildren(upperLeftNode)
-
-        for i = 0, numChildren - 2, 2 do
-            local textNodeId = getChildAt(upperLeftNode, i)
-            local numberNodeId = getChildAt(upperLeftNode, i+1)
-
-            -- move to lower
-            local sizeToUse = size + 0.02;
-            local lowerToSize = i*(sizeToUse/2) + sizeToUse;
+        local bigDisplay = {};
+        bigDisplay.color = color;
+        bigDisplay.textSize = size;
+        bigDisplay.displayLines = {};
+        bigDisplay.currentPage = 1;
+        bigDisplay.lastPageTime = 0;
+        bigDisplay.nodeId = upperLeftNode;
+        bigDisplay.textDrawDistance = 30;
+        
+        -- Mögliche zeilen anhand der Größe erstellen
+        local lineHeight = size;
+        -- local x, y, z = getWorldTranslation(upperLeftNode)
+        local rx, ry, rz = getWorldRotation(upperLeftNode)
+        for currentY = -size/2, -height-(size/2), -lineHeight do
+        
+            local displayLine = {};
+            displayLine.text = {}
+            displayLine.value = {}
             
-            local x,y,z = localToWorld(textNodeId, 0, -lowerToSize, 0);
-            setWorldTranslation(textNodeId, x, y, z)
-            local x,y,z = localToWorld(numberNodeId, width, -lowerToSize, 0);
-            setWorldTranslation(numberNodeId, x, y, z)
+            local x,y,z = localToWorld(upperLeftNode, 0, currentY, 0);
+            displayLine.text.x = x;
+            displayLine.text.y = y;
+            displayLine.text.z = z;
             
-            local display = {};
-            display.textNodeId = textNodeId;
-            display.textSize = size;
-            display.numberNodeId = numberNodeId;
-            if(lowerToSize <= height) then
-                table.insert(spec.bigDisplays, display);
-            end
+            local x,y,z = localToWorld(upperLeftNode, width, currentY, 0);
+            displayLine.value.x = x;
+            displayLine.value.y = y;
+            displayLine.value.z = z;
             
+            displayLine.rx = rx;
+            displayLine.ry = ry;
+            displayLine.rz = rz;
+            
+            table.insert(bigDisplay.displayLines, displayLine);
         end
-
+        
+        table.insert(spec.bigDisplays, bigDisplay);
+                
         i = i + 1;
     end
 
     function spec.fillLevelChangedCallback(fillType, delta)
-        self:updateDisplays();
+        self:updateDisplayData();
     end
 end
 
@@ -119,10 +128,6 @@ function BigDisplaySpecialization:onFinalizePlacement(savegame)
     if spec.storageToUse == nil then 
         return;
     end
-    
-    -- for _, sourceStorage in pairs(self.spec_silo.loadingStation:getSourceStorages()) do
-        -- spec.storageToUse:addFillLevelChangedListeners(spec.fillLevelChangedCallback);
-    -- end
 end
 
 function BigDisplaySpecialization:onPostFinalizePlacement(savegame)
@@ -159,12 +164,17 @@ function BigDisplaySpecialization:onPostFinalizePlacement(savegame)
     end
 
     spec.storageToUse = currentStorage;
-    self:updateDisplays();
+    self:updateDisplayData();
     
     spec.storageToUse:addFillLevelChangedListeners(spec.fillLevelChangedCallback);
 
     table.insert(BigDisplaySpecialization.displays, self);
 end
+
+function BigDisplaySpecialization:onDelete()
+    table.removeElement(BigDisplaySpecialization.displays, self);
+end
+
 
 function BigDisplaySpecialization:getDistance(storage, x, y, z)
 -- print("placable")
@@ -178,51 +188,102 @@ function BigDisplaySpecialization:getDistance(storage, x, y, z)
 	return math.huge
 end
 
-function BigDisplaySpecialization:updateDisplays()
+function BigDisplaySpecialization:updateDisplayData()
     local spec = self.spec_bigDisplay;
     if spec == nil or spec.storageToUse == nil then 
         return;
     end
-    -- print("BigDisplaySpecialization:updateDisplays");
   
-    --  hier tabelle zum anzeigen erzeugen, anzeige selbst in anderer methode machen
-    local line = 1;
-    for fillTypeId, fillLevel in pairs(spec.storageToUse:getFillLevels()) do
-    
-        if spec.bigDisplays[line] == nil then
-            return; -- mehr Zeilen haben wir nicht
+    for _, bigDisplay in pairs(spec.bigDisplays) do
+        -- in jede line schreiben, was angezeigt werden soll
+        -- hier eventuell filtern anhand von xml einstellungen?
+        -- möglich per filltype liste fstzulegen was in welcher reihenfolge angezeigt wird, sinnvoll?
+        -- sortieren per XML einstellung?
+        bigDisplay.lineInfos = {};
+        for fillTypeId, fillLevel in pairs(spec.storageToUse:getFillLevels()) do
+            local lineInfo = {};
+            lineInfo.title = g_fillTypeManager:getFillTypeByIndex(fillTypeId).title;
+            local myFillLevel = Utils.getNoNil(fillLevel, 0);
+            lineInfo.fillLevel = g_i18n:formatNumber(myFillLevel, 0);
+            
+            -- erst mal nur anzeigen wo auch was da ist?
+            -- if(myFillLevel ~= 0) then
+                table.insert(bigDisplay.lineInfos, lineInfo);
+            -- end
         end
         
-        local fillLevel = Utils.getNoNil(fillLevel, 0);
-        
-        -- if fillLevel >= 1 then
-            local fillType = g_fillTypeManager:getFillTypeByIndex(fillTypeId);
-                        
-            -- test mit rendern, wenn geht, dann auslesen und anzeigen trennen
-            local x, y, z = getWorldTranslation(spec.bigDisplays[line].textNodeId)
-            local rx, ry, rz = getWorldRotation(spec.bigDisplays[line].textNodeId)
-            setTextVerticalAlignment(RenderText.VERTICAL_ALIGN_BASELINE)
-            setTextAlignment(RenderText.ALIGN_LEFT)
-            setTextColor(spec.color[1], spec.color[2], spec.color[3], spec.color[4])
-            renderText3D(x, y, z, rx, ry, rz, spec.bigDisplays[line].textSize, fillType.title)
+        table.sort(bigDisplay.lineInfos,compLineInfos)
+    end
+    
+    local line = 1;
+end
+
+function compLineInfos(w1,w2)
+    return w1.title < w2.title;
+end
+
+function BigDisplaySpecialization:updateDisplays(dt)
+    local spec = self.spec_bigDisplay;
+    if spec == nil or spec.storageToUse == nil then 
+        return;
+    end
+    
+    if not self.isClient then 
+        return;
+    end
+    
+    setTextVerticalAlignment(RenderText.VERTICAL_ALIGN_BASELINE)
+    setTextColor(spec.bigDisplays[1].color[1], spec.bigDisplays[1].color[2], spec.bigDisplays[1].color[3], spec.bigDisplays[1].color[4])
+    
+    for _, bigDisplay in pairs(spec.bigDisplays) do
+    
+        -- entfernung zum display ermitteln damit es nicht immer gerendert wird
+        -- display position nur ein mal ermitteln
+        if bigDisplay.worldTranslation == nil then
+            bigDisplay.worldTranslation = {getWorldTranslation(bigDisplay.nodeId)};
+        end
+        -- position des spielers
+        local x, z = 0, 0;
+        if g_currentMission.controlPlayer then
+            x, _, z = getWorldTranslation(g_currentMission.player.rootNode);
+        elseif g_currentMission.controlledVehicle ~= nil then
+            x, _, z = getWorldTranslation(g_currentMission.controlledVehicle.rootNode);
+        end
+    
+        if MathUtil.vector2Length(x - bigDisplay.worldTranslation[1], z - bigDisplay.worldTranslation[3]) < bigDisplay.textDrawDistance then
+            -- paging
+            local pageOffset = 0;
+            bigDisplay.lastPageTime = bigDisplay.lastPageTime + dt;
+            local pages = math.ceil(#bigDisplay.lineInfos / #bigDisplay.displayLines);
+            if bigDisplay.lastPageTime >= 5000 then
+                if bigDisplay.currentPage >= pages then
+                    bigDisplay.currentPage = 1;
+                else
+                    bigDisplay.currentPage = bigDisplay.currentPage + 1;
+                end
+                bigDisplay.lastPageTime = 0;
+            end
             
-            local x, y, z = getWorldTranslation(spec.bigDisplays[line].numberNodeId)
-            local rx, ry, rz = getWorldRotation(spec.bigDisplays[line].numberNodeId)
-            setTextVerticalAlignment(RenderText.VERTICAL_ALIGN_BASELINE)
-            setTextAlignment(RenderText.ALIGN_RIGHT)
-            setTextColor(spec.color[1], spec.color[2], spec.color[3], spec.color[4])
-            renderText3D(x, y, z, rx, ry, rz, spec.bigDisplays[line].textSize, g_i18n:formatNumber(fillLevel, 0))
-            
-            line = line + 1;
-        -- end
+            local pageOffset = (bigDisplay.currentPage - 1) * #bigDisplay.displayLines;
+            for index, displayLine in pairs(bigDisplay.displayLines) do
+                local lineIndex = index + pageOffset;
+                if bigDisplay.lineInfos[lineIndex] ~= nil then
+                    local lineInfo = bigDisplay.lineInfos[lineIndex];
+                    
+                    setTextAlignment(RenderText.ALIGN_LEFT)
+                    renderText3D(displayLine.text.x, displayLine.text.y, displayLine.text.z, displayLine.rx, displayLine.ry, displayLine.rz, spec.bigDisplays[1].textSize, lineInfo.title)
+                    setTextAlignment(RenderText.ALIGN_RIGHT)
+                    renderText3D(displayLine.value.x, displayLine.value.y, displayLine.value.z, displayLine.rx, displayLine.ry, displayLine.rz, spec.bigDisplays[1].textSize, lineInfo.fillLevel)
+                end
+            end
+        end
     end
 end
 
 function BigDisplaySpecialization:update(dt)
-    -- print("BigDisplaySpecialization:update");
     -- update faken, muss auch entfernt werden beim löschen, wenn es so klappt
     for _, display in pairs(BigDisplaySpecialization.displays) do
-        display:updateDisplays();
+        display:updateDisplays(dt);
     end
 end
 
