@@ -85,7 +85,7 @@ function BigDisplaySpecialization:onLoad(savegame)
         local scaleX = self.xmlFile:getValue(bigDisplayKey .. "#scaleX", 1);
         local scaleY = self.xmlFile:getValue(bigDisplayKey .. "#scaleY", 1);
         local mask = self.xmlFile:getValue(bigDisplayKey .. "#mask", "000000000000000");
-        local emissiveScale = self.xmlFile:getValue(bigDisplayKey .. "#emissiveScale", 0);
+        local emissiveScale = self.xmlFile:getValue(bigDisplayKey .. "#emissiveScale", 0.5);
         local color = self.xmlFile:getValue(bigDisplayKey .. "#color", {
         0.6,
         0.9,

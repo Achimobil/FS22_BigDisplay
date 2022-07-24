@@ -25,10 +25,10 @@
       <CustomParameter name="colorMat6" value="1 0.1 1 1"/>
       <CustomParameter name="colorMat7" value="0.1 1 1 1"/>
     </Material>
-    <Material name="Plastik_mat" materialId="5" diffuseColor="0.8 0.8 0.8 1" specularColor="0.494118 1 0" customShaderId="3" customShaderVariation="colorMask">
+    <Material name="Plastik_mat" materialId="5" diffuseColor="0.988235 0.988235 0.988235 1" specularColor="0.494118 1 0" customShaderId="3" customShaderVariation="colorMask">
       <CustomParameter name="RDT" value="0 0 0 0"/>
       <CustomParameter name="dirtColor" value="0.2 0.14 0.08 0"/>
-      <CustomParameter name="colorMat0" value="0.8 0.8 0.8 1"/>
+      <CustomParameter name="colorMat0" value="0.2 0.2 0.2 1"/>
       <CustomParameter name="colorMat1" value="1 0.1 0.1 1"/>
       <CustomParameter name="colorMat2" value="0.1 1 0.1 1"/>
       <CustomParameter name="colorMat3" value="0.1 0.1 1 1"/>
@@ -52,7 +52,12 @@
         <Shape shapeId="1" name="Cube" rotation="-6.83019e-06 -0 0" static="true" clipDistance="1000" nodeId="10" materialIds="5" castsShadows="true" receiveShadows="true"/>
         <Shape shapeId="2" name="Plane" translation="-0.0113409 1.76 0.014176" rotation="90 -0 0" clipDistance="1000" nodeId="11" materialIds="4" castsShadows="true" receiveShadows="true">
           <TransformGroup name="TextArea" translation="-0.909901 0.14 -1.12801" rotation="-90 -0 0" nodeId="12">
+            <TransformGroup name="textNode" nodeId="13"/>
+            <TransformGroup name="textNode" nodeId="14"/>
             <TransformGroup name="textNode" nodeId="15"/>
+            <TransformGroup name="textNode" nodeId="16"/>
+            <TransformGroup name="textNode" nodeId="17"/>
+            <TransformGroup name="textNode" nodeId="18"/>
             <TransformGroup name="textNode" nodeId="19"/>
             <TransformGroup name="textNode" nodeId="20"/>
             <TransformGroup name="textNode" nodeId="21"/>
@@ -79,11 +84,6 @@
             <TransformGroup name="textNode" nodeId="42"/>
             <TransformGroup name="textNode" nodeId="43"/>
             <TransformGroup name="textNode" nodeId="44"/>
-            <TransformGroup name="textNode" nodeId="45"/>
-            <TransformGroup name="textNode" nodeId="46"/>
-            <TransformGroup name="textNode" nodeId="47"/>
-            <TransformGroup name="textNode" nodeId="48"/>
-            <TransformGroup name="textNode" nodeId="49"/>
           </TransformGroup>
         </Shape>
       </TransformGroup>
