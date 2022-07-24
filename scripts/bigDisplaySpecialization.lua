@@ -207,9 +207,9 @@ function BigDisplaySpecialization:updateDisplayData()
             lineInfo.fillLevel = g_i18n:formatNumber(myFillLevel, 0);
             
             -- erst mal nur anzeigen wo auch was da ist?
-            -- if(myFillLevel ~= 0) then
+            if(myFillLevel ~= 0) then
                 table.insert(bigDisplay.lineInfos, lineInfo);
-            -- end
+            end
         end
         
         table.sort(bigDisplay.lineInfos,compLineInfos)
