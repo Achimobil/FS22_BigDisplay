@@ -126,7 +126,7 @@ end
 
 function BigDisplaySpecialization:onFinalizePlacement(savegame)
     local spec = self.spec_bigDisplay;
-    if spec.storageToUse == nil then 
+    if spec.loadingStationToUse == nil then 
         return;
     end
 end
@@ -139,9 +139,12 @@ end
 function BigDisplaySpecialization:reconnectToStorage(savegame)
     local spec = self.spec_bigDisplay;
     
-    if spec.storageToUse ~= nil then 
-        spec.storageToUse:removeFillLevelChangedListeners(spec.fillLevelChangedCallback);
-        spec.storageToUse = nil;
+    if spec.loadingStationToUse ~= nil then 
+        local storages = spec.loadingStationToUse.sourceStorages or spec.loadingStationToUse.targetStorages;
+        for _, sourceStorage in pairs(storages) do
+            sourceStorage:removeFillLevelChangedListeners(spec.fillLevelChangedCallback);
+        end
+        spec.loadingStationToUse = nil;
     end
     
     if not self.isClient then 
@@ -149,39 +152,78 @@ function BigDisplaySpecialization:reconnectToStorage(savegame)
     end
     
     -- find the storage closest to me
-    local currentStorage = nil;
+    local currentLoadingStation = nil;
     local currentDistance = math.huge;
     for _, storage in pairs(g_currentMission.storageSystem:getStorages()) do
-        -- entfernung wie messen?
-        local distance = BigDisplaySpecialization:getDistance(storage, self.position.x, self.position.y, self.position.z)
-        if distance < currentDistance then
-            currentDistance = distance;
-            currentStorage = storage;
+        -- wenn tierstall, dann ignorieren
+        local ignore = false;
+        
+        -- loadingStation oder unloadingStation aus der liste die jeweils erste benutzen
+        local loadingStation = nil;
+        
+        for j, loadingSt in pairs (storage.loadingStations) do
+            if loadingStation == nil then
+                loadingStation = loadingSt;
+            end
+        end
+        
+        if loadingStation == nil then
+            for j, unloadingSt in pairs (storage.unloadingStations) do
+                if loadingStation == nil then
+                    loadingStation = unloadingSt;
+                end
+            end
+        end
+        
+        if loadingStation.owningPlaceable ~= nil then
+            if loadingStation.owningPlaceable.spec_husbandry ~= nil or loadingStation.owningPlaceable.spec_manureHeap ~= nil then
+                ignore = true;
+            end
+        end
+        
+        if loadingStation ~= nil then
+            -- entfernung wie messen?
+            local distance = BigDisplaySpecialization:getDistance(loadingStation, self.position.x, self.position.y, self.position.z)
+            if distance < currentDistance and not ignore then
+                currentDistance = distance;
+                currentLoadingStation = loadingStation;
+            end
         end
     end
     
     -- auch produktionen durchsuchen nach dem richtigen storage, die stehen nicht im storage system
     local farmId = self:getOwnerFarmId();
     
-    
     for index, productionPoint in ipairs(g_currentMission.productionChainManager:getProductionPointsForFarmId(farmId)) do
-        local distance = BigDisplaySpecialization:getDistance(productionPoint.storage, self.position.x, self.position.y, self.position.z)
-        if distance < currentDistance then
-            currentDistance = distance;
-            currentStorage = productionPoint.storage;
+        
+        local loadingStation = productionPoint.loadingStation;
+        if loadingStation == nil then
+            loadingStation = productionPoint.unloadingStation;
+        end
+        if loadingStation ~= nil then
+        
+            local distance = BigDisplaySpecialization:getDistance(loadingStation, self.position.x, self.position.y, self.position.z)
+            if distance < currentDistance then
+                currentDistance = distance;
+                currentLoadingStation = loadingStation;
+            end
         end
 		
 	end
     
-    if currentStorage == nil then
-        print("no Storage found");
+    if currentLoadingStation == nil then
+        print("no Loading Station found");
         return;
     end
 
-    spec.storageToUse = currentStorage;
+    spec.loadingStationToUse = currentLoadingStation;
     self:updateDisplayData();
     
-    spec.storageToUse:addFillLevelChangedListeners(spec.fillLevelChangedCallback);
+    local storages = spec.loadingStationToUse.sourceStorages or spec.loadingStationToUse.targetStorages;
+    
+    for _, sourceStorage in pairs(storages) do
+        sourceStorage:addFillLevelChangedListeners(spec.fillLevelChangedCallback);
+    end
 
     -- table.insert(BigDisplaySpecialization.displays, self);
 end
@@ -190,11 +232,11 @@ function BigDisplaySpecialization:onDelete()
     table.removeElement(BigDisplaySpecialization.displays, self);
 end
 
-function BigDisplaySpecialization:getDistance(storage, x, y, z)
+function BigDisplaySpecialization:getDistance(loadingStation, x, y, z)
 -- print("placable")
 -- DebugUtil.printTableRecursively(placable,"_",0,2)
-	if storage ~= nil then
-		local tx, ty, tz = getWorldTranslation(storage.rootNode)
+	if loadingStation ~= nil then
+		local tx, ty, tz = getWorldTranslation(loadingStation.rootNode)
 
 		return MathUtil.vector3Length(x - tx, y - ty, z - tz)
 	end
@@ -204,9 +246,11 @@ end
 
 function BigDisplaySpecialization:updateDisplayData()
     local spec = self.spec_bigDisplay;
-    if spec == nil or spec.storageToUse == nil then 
+    if spec == nil or spec.loadingStationToUse == nil then 
         return;
     end
+    
+    local farmId = self:getOwnerFarmId();
   
     for _, bigDisplay in pairs(spec.bigDisplays) do
         -- in jede line schreiben, was angezeigt werden soll
@@ -214,7 +258,7 @@ function BigDisplaySpecialization:updateDisplayData()
         -- möglich per filltype liste fstzulegen was in welcher reihenfolge angezeigt wird, sinnvoll?
         -- sortieren per XML einstellung?
         bigDisplay.lineInfos = {};
-        for fillTypeId, fillLevel in pairs(spec.storageToUse:getFillLevels()) do
+        for fillTypeId, fillLevel in pairs(BigDisplaySpecialization:getAllFillLevels(spec.loadingStationToUse, farmId)) do
             local lineInfo = {};
             lineInfo.title = g_fillTypeManager:getFillTypeByIndex(fillTypeId).title;
             local myFillLevel = Utils.getNoNil(fillLevel, 0);
@@ -232,13 +276,29 @@ function BigDisplaySpecialization:updateDisplayData()
     local line = 1;
 end
 
+function BigDisplaySpecialization:getAllFillLevels(station, farmId)
+	local fillLevels = {}
+    
+    local storages = station.sourceStorages or station.targetStorages;
+
+	for _, sourceStorage in pairs(storages) do
+		if station:hasFarmAccessToStorage(farmId, sourceStorage) then
+			for fillType, fillLevel in pairs(sourceStorage:getFillLevels()) do
+				fillLevels[fillType] = Utils.getNoNil(fillLevels[fillType], 0) + fillLevel
+			end
+		end
+	end
+
+	return fillLevels
+end
+
 function compLineInfos(w1,w2)
     return w1.title < w2.title;
 end
 
 function BigDisplaySpecialization:updateDisplays(dt)
     local spec = self.spec_bigDisplay;
-    if spec == nil or spec.storageToUse == nil then 
+    if spec == nil or spec.loadingStationToUse == nil then 
         return;
     end
     
