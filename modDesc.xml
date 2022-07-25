@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="67">
     <author>Achimobil</author>
-    <version>0.1.0.0</version>
+    <version>0.1.1.0</version>
     <title>
         <de>Große Digitalanzeige</de>
         <en>Big Digital Display</en>
@@ -36,16 +36,6 @@ Scripts and models fall under copyright. Copying in whole or in part is prohibit
     <brands>
         <brand name="FARMERTOOLS" title="Farmer Tools" image="store/FarmerTools.dds"/>
     </brands>
-    
-	<dependencies>
-		<dependency>FS22_A_ProductionRevamp</dependency>
-	</dependencies>
-    
-    <extraSourceFiles>
-		<sourceFile filename="scripts/revamp_check.lua" />
-    </extraSourceFiles>
-    
-    <revamp minVersion="1.2.0.0" />
 
     <placeableSpecializations>
         <specialization name="bigDisplay" className="BigDisplaySpecialization" filename="scripts/bigDisplaySpecialization.lua"/>
