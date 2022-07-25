@@ -3,13 +3,30 @@
     <author>Achimobil</author>
     <version>0.1.0.0</version>
     <title>
-        <en>Big Display</en>
+        <de>Große Digitalanzeige</de>
+        <en>Big Digital Display</en>
     </title>
     <description>
-        <en>
-            <![CDATA[soon]]></en>
         <de>
-            <![CDATA[soon]]></de>
+            <![CDATA[Digitalanzeige für die nächste Produktion oder das Lager.
+Zeigt alle Inhalte alphabetisch (lua) sortiert an.
+Automatische Paging bei vielen Inhalten.
+
+Beim Spielstart sucht sich das Display das nächstgelegene Ziel zur Anzeige.
+Wenn also etwas näher platziert oder gelöscht wird, so wird die Anzeige noch den alten Wert anzeigen.
+
+Skripte und Modelle fallen unter das Urheberrecht. Kopieren ganz oder in Teilen ist untersagt.]]>
+        </de>
+        <en>
+            <![CDATA[Digital display for the next production or warehouse.
+Displays all content sorted alphabetically (lua).
+Automatic paging when there is a lot of content.
+
+When the game starts, the display looks for the closest target to display.
+So if something is placed closer or deleted, the display will still show the old value.
+
+Scripts and models fall under copyright. Copying in whole or in part is prohibited.]]>
+        </en>
     </description>
     <multiplayer supported="true"/>
     <iconFilename>icon.dds</iconFilename>
@@ -39,4 +56,15 @@
             <specialization name="bigDisplay"/>
         </type>
     </placeableTypes>
+    
+    <l10n>
+		<text name="unversalDisplay">
+			<de>Universal Anzeige</de> 
+			<en>Universal Display</en> 
+		</text>
+		<text name="function_unversalDisplay"> 
+			<de>Digitalanzeige für die nächste Produktion oder das Lager. Zeigt alle Inhalte alphabetisch (lua) sortiert an. Automatische Paging bei vielen Inhalten.</de> 
+			<en>Digital display for the next production or warehouse. Displays all content sorted alphabetically (lua). Automatic paging when there is a lot of content.</en> 
+		</text>
+    </l10n>
 </modDesc>

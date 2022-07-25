@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <placeable type="bigDisplayType" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../shared/xml/schema/placeable.xsd">
     <storeData>
-        <name>$l10n_soon</name>
+        <name>$l10n_unversalDisplay</name>
         <functions>
-            <function>$l10n_function_soon</function>
+            <function>$l10n_function_unversalDisplay</function>
         </functions>
-        <image>store/woodStorage.dds</image>
-        <price>50000</price>
+        <image>store/BigDisplay.dds</image>
+        <price>5000</price>
         <lifetime>1000</lifetime>
-        <dailyUpkeep>50</dailyUpkeep>
+        <dailyUpkeep>5</dailyUpkeep>
         <rotation>0</rotation>
         <brand>FARMERTOOLS</brand>
         <species>placeable</species>
@@ -34,17 +34,18 @@
         <!-- <hotspot type="UNLOADING" linkNode="triggerMarker" teleportNode="triggerMarker"/> -->
     <!-- </hotspots> -->
     
-    <!-- <clearAreas> -->
+    <clearAreas />
         <!-- <clearArea startNode="clearArea1Start" widthNode="clearArea1Width" heightNode="clearArea1Height"/> -->
     <!-- </clearAreas> -->
     
+    <leveling requireLeveling="false" />
     <!-- <leveling requireLeveling="true" maxSmoothDistance="10" maxSlope="75" maxEdgeAngle="30"> -->
         <!-- <levelAreas> -->
             <!-- <levelArea startNode="levelArea1Start" widthNode="levelArea1Width" heightNode="levelArea1Height" groundType="forestGround"/> -->
         <!-- </levelAreas> -->
     <!-- </leveling> -->
 	
-    <!-- <indoorAreas> -->
+    <indoorAreas />
         <!-- <indoorArea startNode="indoorArea1Start" widthNode="indoorArea1Width" heightNode="indoorArea1Height"/> -->
     <!-- </indoorAreas> -->
 	
@@ -61,11 +62,12 @@
         <!-- </sounds> -->
     <!-- </placement> -->
 	
-    <!-- <ai> -->
+    <ai>
+        <updateAreas />
         <!-- <updateAreas> -->
             <!-- <updateArea startNode="tipOcclusionUpdateArea1Start" endNode="tipOcclusionUpdateArea1End"/> -->
         <!-- </updateAreas> -->
-    <!-- </ai> -->
+    </ai>
     
     <!-- <infoTrigger triggerNode="infoTrigger"/> -->
     
