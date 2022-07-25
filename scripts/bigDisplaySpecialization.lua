@@ -175,7 +175,7 @@ function BigDisplaySpecialization:reconnectToStorage(savegame)
             end
         end
         
-        if loadingStation.owningPlaceable ~= nil then
+        if loadingStation ~= nil and loadingStation.owningPlaceable ~= nil then
             if loadingStation.owningPlaceable.spec_husbandry ~= nil or loadingStation.owningPlaceable.spec_manureHeap ~= nil then
                 ignore = true;
             end
