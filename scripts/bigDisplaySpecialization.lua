@@ -38,6 +38,10 @@ function BigDisplaySpecialization.registerFunctions(placeableType)
     SpecializationUtil.registerFunction(placeableType, "reconnectToStorage", BigDisplaySpecialization.reconnectToStorage);
 end
 
+function BigDisplaySpecialization.registerOverwrittenFunctions(placeableType)
+	SpecializationUtil.registerOverwrittenFunction(placeableType, "updateInfo", BigDisplaySpecialization.updateInfo)
+end
+
 function BigDisplaySpecialization.registerXMLPaths(schema, basePath)
     schema:setXMLSpecializationType("BigDisplay");
 
@@ -218,6 +222,9 @@ function BigDisplaySpecialization:reconnectToStorage(savegame)
     spec.loadingStationToUse = currentLoadingStation;
     self:updateDisplayData();
     
+-- print("spec.loadingStationToUse")
+-- DebugUtil.printTableRecursively(spec.loadingStationToUse,"_",0,2)
+    
     local storages = spec.loadingStationToUse.sourceStorages or spec.loadingStationToUse.targetStorages;
     
     for _, sourceStorage in pairs(storages) do
@@ -357,6 +364,25 @@ function BigDisplaySpecialization:update(dt)
     -- update faken, muss auch entfernt werden beim löschen, wenn es so klappt
     for _, display in pairs(BigDisplaySpecialization.displays) do
         display:updateDisplays(dt);
+    end
+end
+
+
+function BigDisplaySpecialization:updateInfo(superFunc, infoTable)
+    local spec = self.spec_bigDisplay;
+
+	local owningFarm = g_farmManager:getFarmById(self:getOwnerFarmId())
+
+	table.insert(infoTable, {
+		title = g_i18n:getText("fieldInfo_ownedBy"),
+		text = owningFarm.name
+	})
+
+    if (spec.loadingStationToUse ~= nil) then
+        table.insert(infoTable, {
+            title = g_i18n:getText("bigDisplay_connected_with"),
+            text = spec.loadingStationToUse:getName();
+        })
     end
 end
 

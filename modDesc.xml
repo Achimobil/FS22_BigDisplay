@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="67">
     <author>Achimobil</author>
-    <version>0.1.1.0</version>
+    <version>0.2.0.0</version>
     <title>
         <de>Große Digitalanzeige</de>
         <en>Big Digital Display</en>
@@ -15,7 +15,11 @@ Automatische Paging bei vielen Inhalten.
 Beim Spielstart sucht sich das Display das nächstgelegene Ziel zur Anzeige.
 Wenn also etwas näher platziert oder gelöscht wird, so wird die Anzeige noch den alten Wert anzeigen.
 
-Skripte und Modelle fallen unter das Urheberrecht. Kopieren ganz oder in Teilen ist untersagt.]]>
+Skripte und Modelle fallen unter das Urheberrecht. Kopieren ganz oder in Teilen ist untersagt.
+
+Changelog 0.2.0.0
+- Clip distace eingestellt
+- Info Azeige wem das Display gehört und womit es verbunden ist hinzugefügt]]>
         </de>
         <en>
             <![CDATA[Digital display for the next production or warehouse.
@@ -44,6 +48,7 @@ Scripts and models fall under copyright. Copying in whole or in part is prohibit
     <placeableTypes>
         <type name="bigDisplayType" parent="simplePlaceable" filename="$dataS/scripts/placeables/Placeable.lua">
             <specialization name="bigDisplay"/>
+            <specialization name="infoTrigger" />
         </type>
     </placeableTypes>
     
@@ -57,6 +62,11 @@ Scripts and models fall under copyright. Copying in whole or in part is prohibit
             <de>Digitalanzeige für die nächste Produktion oder das Lager. Zeigt alle Inhalte alphabetisch (lua) sortiert an. Automatische Paging bei vielen Inhalten.</de>
             <en>Digital display for the next production or warehouse. Displays all content sorted alphabetically (lua). Automatic paging when there is a lot of content.</en>
             <ru>Цифровой дисплей для ближайшего производства или склада. Отображает всё содержимое, отсортированное в алфавитном порядке. Автоматическая прокрутка для длинного списка.</ru>
+        </text>
+        <text name="bigDisplay_connected_with"> 
+            <de>Verbundenn mit</de>
+            <en>Connected with</en>
+            <ru>Connected with</ru>
         </text>
     </l10n>
 </modDesc>

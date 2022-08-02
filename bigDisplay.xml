@@ -38,4 +38,6 @@
     <ai>
         <updateAreas />
     </ai>
+    
+    <infoTrigger triggerNode="1>0" />
 </placeable>

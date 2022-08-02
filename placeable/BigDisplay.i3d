@@ -37,6 +37,8 @@
       <CustomParameter name="colorMat6" value="1 0.1 1 1"/>
       <CustomParameter name="colorMat7" value="0.1 1 1 1"/>
     </Material>
+    <Material name="UnnamedMaterial" materialId="17" diffuseColor="1 1 1 1">
+    </Material>
   </Materials>
 
 
@@ -53,6 +55,9 @@
         <Shape shapeId="2" name="Plane" translation="-0.0113409 1.76 0.014176" rotation="90 -0 0" clipDistance="200" nodeId="11" materialIds="4" castsShadows="true" receiveShadows="true">
           <TransformGroup name="TextArea" translation="-0.909901 0.14 -1.12801" rotation="-90 -0 0" clipDistance="200" nodeId="12"/>
         </Shape>
+      </TransformGroup>
+      <TransformGroup name="functions" nodeId="18">
+        <Shape shapeId="3" name="cube" translation="0 1.5 0" scale="3 3 3" static="true" trigger="true" collisionMask="1048576" nodeId="16" materialIds="17" nonRenderable="true" distanceBlending="false"/>
       </TransformGroup>
   </Scene>
 
