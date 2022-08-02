@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="67">
     <author>Achimobil</author>
-    <version>0.2.0.0</version>
+    <version>0.2.0.0 beta</version>
     <title>
         <de>Große Digitalanzeige</de>
         <en>Big Digital Display</en>
@@ -17,7 +17,7 @@ Wenn also etwas näher platziert oder gelöscht wird, so wird die Anzeige noch d
 
 Skripte und Modelle fallen unter das Urheberrecht. Kopieren ganz oder in Teilen ist untersagt.
 
-Changelog 0.2.0.0
+Changelog 0.2.0.0 beta
 - Clip distace eingestellt
 - Info Azeige wem das Display gehört und womit es verbunden ist hinzugefügt]]>
         </de>
