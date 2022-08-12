@@ -18,8 +18,9 @@ Wenn also etwas näher platziert oder gelöscht wird, so wird die Anzeige noch d
 Skripte und Modelle fallen unter das Urheberrecht. Kopieren ganz oder in Teilen ist untersagt.
 
 Changelog 0.2.0.0 beta
-- Clip distace eingestellt
-- Info Azeige wem das Display gehört und womit es verbunden ist hinzugefügt]]>
+- Clip distance eingestellt
+- Info Azeige wem das Display gehört und womit es verbunden ist hinzugefügt
+- Mittelgroße Wandanzeige erstellt]]>
         </de>
         <en>
             <![CDATA[Digital display for the next production or warehouse.
@@ -36,6 +37,7 @@ Scripts and models fall under copyright. Copying in whole or in part is prohibit
     <iconFilename>icon.dds</iconFilename>
     <storeItems>
         <storeItem xmlFilename="bigDisplay.xml"/>
+        <storeItem xmlFilename="smallDisplay.xml"/>
     </storeItems>
     <brands>
         <brand name="FARMERTOOLS" title="Farmer Tools" image="store/FarmerTools.dds"/>
