@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="XtraSmallDisplay" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="9.0.3"/>
+  </Asset>
+
+  <Files>
+    <File fileId="3" filename="$data/shaders/vehicleShader.xml"/>
+    <File fileId="7" filename="$data/shared/clearPlastic_diffuse.dds"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="case_mat" materialId="4" diffuseColor="0.0156863 0.0156863 0.0156863 1" specularColor="0.494118 1 0" customShaderId="3" customShaderVariation="colorMask">
+      <CustomParameter name="RDT" value="0 0 0 0"/>
+      <CustomParameter name="dirtColor" value="0.2 0.14 0.08 0"/>
+      <CustomParameter name="colorMat0" value="0.2 0.2 0.2 6"/>
+      <CustomParameter name="colorMat1" value="1 0.1 0.1 1"/>
+      <CustomParameter name="colorMat2" value="0.1 1 0.1 1"/>
+      <CustomParameter name="colorMat3" value="0.1 0.1 1 1"/>
+      <CustomParameter name="colorMat4" value="1 1 0.1 1"/>
+      <CustomParameter name="colorMat5" value="0.05 0.05 0.05 1"/>
+      <CustomParameter name="colorMat6" value="1 0.1 1 1"/>
+      <CustomParameter name="colorMat7" value="0.1 1 1 1"/>
+    </Material>
+    <Material name="default" materialId="5" diffuseColor="0.494118 0.494118 0.494118 1">
+    </Material>
+    <Material name="glass_mat" materialId="6" specularColor="0.494118 1 0" alphaBlending="true" customShaderId="3" customShaderVariation="colorMask">
+      <Texture fileId="7"/>
+      <CustomParameter name="RDT" value="0 0 0 0"/>
+      <CustomParameter name="dirtColor" value="0.2 0.14 0.08 0"/>
+      <CustomParameter name="colorMat0" value="0.1 0 0 2"/>
+      <CustomParameter name="colorMat1" value="1 0.1 0.1 1"/>
+      <CustomParameter name="colorMat2" value="0.1 1 0.1 1"/>
+      <CustomParameter name="colorMat3" value="0.1 0.1 1 1"/>
+      <CustomParameter name="colorMat4" value="1 1 0.1 1"/>
+      <CustomParameter name="colorMat5" value="0.05 0.05 0.05 1"/>
+      <CustomParameter name="colorMat6" value="1 0.1 1 1"/>
+      <CustomParameter name="colorMat7" value="0.1 1 1 1"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="XtraSmallDisplay.i3d.shapes">
+  </Shapes>
+
+
+  <Dynamics>
+  </Dynamics>
+
+  <Scene>
+      <TransformGroup name="display" rotation="-6.83019e-06 -0 0" nodeId="11">
+        <Shape shapeId="1" name="Case" translation="0 0.5 -2.18557e-08" rotation="-6.83019e-06 -0 0" static="true" nodeId="12" materialIds="4">
+          <Shape shapeId="2" name="Glass" translation="0 -0.5 2.18557e-08" rotation="90 -0 0" nodeId="13" materialIds="6"/>
+          <TransformGroup name="displayStartPoint" translation="-0.945 -0.085 0.089" rotation="-6.83019e-06 -0 0" nodeId="14"/>
+        </Shape>
+      </TransformGroup>
+      <TransformGroup name="functions" rotation="-6.83019e-06 -0 0" nodeId="15">
+        <Shape shapeId="3" name="infoTriggerNode" translation="0 3.0598e-08 0.7" rotation="-6.83019e-06 -0 0" kinematic="true" compound="true" trigger="true" collisionMask="1048576" nodeId="16" materialIds="5" nonRenderable="true"/>
+      </TransformGroup>
+  </Scene>
+
+</i3D>

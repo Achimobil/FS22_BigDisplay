@@ -20,7 +20,7 @@ Skripte und Modelle fallen unter das Urheberrecht. Kopieren ganz oder in Teilen 
 Changelog 0.2.0.0 beta
 - Clip distance eingestellt
 - Info Azeige wem das Display gehört und womit es verbunden ist hinzugefügt
-- Mittelgroße Wandanzeige erstellt]]>
+- Wanddisplays in 3 größen hinzugefügt]]>
         </de>
         <en>
             <![CDATA[Digital display for the next production or warehouse.
@@ -36,8 +36,10 @@ Scripts and models fall under copyright. Copying in whole or in part is prohibit
     <multiplayer supported="true"/>
     <iconFilename>icon.dds</iconFilename>
     <storeItems>
-        <storeItem xmlFilename="bigDisplay.xml"/>
+        <storeItem xmlFilename="XtraSmallDisplay.xml"/>
         <storeItem xmlFilename="smallDisplay.xml"/>
+        <storeItem xmlFilename="mediumDisplay.xml"/>
+        <storeItem xmlFilename="bigDisplay.xml"/>
     </storeItems>
     <brands>
         <brand name="FARMERTOOLS" title="Farmer Tools" image="store/FarmerTools.dds"/>
