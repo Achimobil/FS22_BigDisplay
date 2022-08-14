@@ -290,6 +290,11 @@ function BigDisplaySpecialization:getDistance(loadingStation, x, y, z)
 -- DebugUtil.printTableRecursively(placable,"_",0,2)
 	if loadingStation ~= nil then
 		local tx, ty, tz = getWorldTranslation(loadingStation.rootNode)
+        
+        if tx == nil or ty == nil or tz == nil then
+            -- fehlerhafte loadingstations deren position nicht ermitteln kann, ignorieren wir hier
+            return math.huge
+        end
 
 		return MathUtil.vector3Length(x - tx, y - ty, z - tz)
 	end
