@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="67">
     <author>Achimobil</author>
-    <version>0.2.0.0 beta</version>
+    <version>0.2.0.0</version>
     <title>
-        <de>Große Digitalanzeige</de>
-        <en>Big Digital Display</en>
+        <de>Digitalanzeigen</de>
+        <en>Digital Display</en>
     </title>
     <description>
         <de>
@@ -17,10 +17,11 @@ Wenn also etwas näher platziert oder gelöscht wird, so wird die Anzeige noch d
 
 Skripte und Modelle fallen unter das Urheberrecht. Kopieren ganz oder in Teilen ist untersagt.
 
-Changelog 0.2.0.0 beta
+Changelog 0.2.0.0
 - Clip distance eingestellt
 - Info Azeige wem das Display gehört und womit es verbunden ist hinzugefügt
-- Wanddisplays in 3 größen hinzugefügt]]>
+- Wanddisplays in 3 größen hinzugefügt
+- Bei Produktionen haben Inputs, Outputs und Hybride nun eine unterschiedliche Farbe. Es bleibt gesamt Alpabetisch sortiert.]]>
         </de>
         <en>
             <![CDATA[Digital display for the next production or warehouse.
@@ -30,7 +31,13 @@ Automatic paging when there is a lot of content.
 When the game starts, the display looks for the closest target to display.
 So if something is placed closer or deleted, the display will still show the old value.
 
-Scripts and models fall under copyright. Copying in whole or in part is prohibited.]]>
+Scripts and models fall under copyright. Copying in whole or in part is prohibited.
+
+Changelog 0.2.0.0
+- Clip distance changes
+- Added info about who owns the display and what it is connected to.
+- Added wall displays in 3 sizes
+- For productions the inputs, outputs and hybrids now have a different color. It remains sorted alphabetically.]]>
         </en>
     </description>
     <multiplayer supported="true"/>
