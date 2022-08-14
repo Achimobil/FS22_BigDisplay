@@ -67,7 +67,7 @@ Changelog 0.2.0.0
         <text name="unversalDisplay">
             <de>Universal Anzeige (%s Zeilen)</de> 
             <en>Universal Display (%s Lines)</en>
-            <ru>Универсальный дисплей (%s Lines)</ru>
+            <ru>Универсальный дисплей (%s Строк)</ru>
         </text>
         <text name="function_unversalDisplay"> 
             <de>Digitalanzeige für die nächste Produktion oder das Lager. Zeigt alle Inhalte alphabetisch (lua) sortiert an. Automatische Paging bei vielen Inhalten.</de>
@@ -77,7 +77,7 @@ Changelog 0.2.0.0
         <text name="bigDisplay_connected_with"> 
             <de>Verbundenn mit</de>
             <en>Connected with</en>
-            <ru>Connected with</ru>
+            <ru>Подключён к</ru>
         </text>
     </l10n>
 </modDesc>
