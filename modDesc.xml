@@ -58,9 +58,9 @@ Scripts and models fall under copyright. Copying in whole or in part is prohibit
     
     <l10n>
         <text name="unversalDisplay">
-            <de>Universal Anzeige</de> 
-            <en>Universal Display</en>
-            <ru>Универсальный дисплей</ru>
+            <de>Universal Anzeige (%s Zeilen)</de> 
+            <en>Universal Display (%s Lines)</en>
+            <ru>Универсальный дисплей (%s Lines)</ru>
         </text>
         <text name="function_unversalDisplay"> 
             <de>Digitalanzeige für die nächste Produktion oder das Lager. Zeigt alle Inhalte alphabetisch (lua) sortiert an. Automatische Paging bei vielen Inhalten.</de>
