@@ -50,6 +50,8 @@ function BigDisplaySpecialization.registerXMLPaths(schema, basePath)
     schema:register(XMLValueType.FLOAT, basePath .. ".bigDisplays.bigDisplay(?)#width", "width of the screen Area");
     schema:register(XMLValueType.FLOAT, basePath .. ".bigDisplays.bigDisplay(?)#size", "Display text size");
     schema:register(XMLValueType.COLOR, basePath .. ".bigDisplays.bigDisplay(?)#color", "Display text color");
+    schema:register(XMLValueType.COLOR, basePath .. ".bigDisplays.bigDisplay(?)#colorHybrid", "Display text color");
+    schema:register(XMLValueType.COLOR, basePath .. ".bigDisplays.bigDisplay(?)#colorInput", "Display text color");
     
     schema:setXMLSpecializationType();
 end
@@ -60,6 +62,7 @@ function BigDisplaySpecialization:onLoad(savegame)
     local xmlFile = self.xmlFile;
     
     spec.bigDisplays = {};
+    spec.changedColors = {}
     local i = 0;
 
     while true do
@@ -81,8 +84,23 @@ function BigDisplaySpecialization:onLoad(savegame)
         0.0,
         1
         }, true);
+        local colorHybrid = self.xmlFile:getValue(bigDisplayKey .. "#colorHybrid", {
+        0.5,
+        0.7,
+        0.0,
+        1
+        }, true);
+        local colorInput = self.xmlFile:getValue(bigDisplayKey .. "#colorInput", {
+        0.0,
+        0.7,
+        0.3,
+        1
+        }, true);
+        
         local bigDisplay = {};
         bigDisplay.color = color;
+        bigDisplay.colorHybrid = colorHybrid;
+        bigDisplay.colorInput = colorInput;
         bigDisplay.textSize = size;
         bigDisplay.displayLines = {};
         bigDisplay.currentPage = 1;
@@ -157,6 +175,7 @@ function BigDisplaySpecialization:reconnectToStorage(savegame)
     -- find the storage closest to me
     local currentLoadingStation = nil;
     local currentDistance = math.huge;
+    local usedProduction = nil;
     for _, storage in pairs(g_currentMission.storageSystem:getStorages()) do
         -- wenn tierstall, dann ignorieren
         local ignore = false;
@@ -209,6 +228,7 @@ function BigDisplaySpecialization:reconnectToStorage(savegame)
             if distance < currentDistance then
                 currentDistance = distance;
                 currentLoadingStation = loadingStation;
+                usedProduction = productionPoint;
             end
         end
 		
@@ -224,6 +244,33 @@ function BigDisplaySpecialization:reconnectToStorage(savegame)
     
 -- print("spec.loadingStationToUse")
 -- DebugUtil.printTableRecursively(spec.loadingStationToUse,"_",0,2)
+
+    -- farben festlegen. Input, output oder beides?
+    if usedProduction ~= nil then
+        for inputFillTypeIndex in pairs(usedProduction.inputFillTypeIds) do
+            if spec.changedColors[inputFillTypeIndex] == nil then
+                spec.changedColors[inputFillTypeIndex] = {isInput = false, isOutput = false};
+            end
+            spec.changedColors[inputFillTypeIndex].isInput = true;
+        end
+        for outputFillTypeIndex in pairs(usedProduction.outputFillTypeIds) do
+            if spec.changedColors[outputFillTypeIndex] == nil then
+                spec.changedColors[outputFillTypeIndex] = {isInput = false, isOutput = false};
+            end
+            spec.changedColors[outputFillTypeIndex].isOutput = true;
+        end
+        for fillTypeIndex, changedColor in pairs(spec.changedColors) do
+            if changedColor.isInput then
+                if changedColor.isOutput then
+                    changedColor.color = spec.bigDisplays[1].colorHybrid;
+                else
+                    changedColor.color = spec.bigDisplays[1].colorInput;
+                end
+            else
+                changedColor.color = spec.bigDisplays[1].color;
+            end
+        end
+    end
     
     local storages = spec.loadingStationToUse.sourceStorages or spec.loadingStationToUse.targetStorages;
     
@@ -266,6 +313,7 @@ function BigDisplaySpecialization:updateDisplayData()
         bigDisplay.lineInfos = {};
         for fillTypeId, fillLevel in pairs(BigDisplaySpecialization:getAllFillLevels(spec.loadingStationToUse, farmId)) do
             local lineInfo = {};
+            lineInfo.fillTypeId = fillTypeId;
             lineInfo.title = g_fillTypeManager:getFillTypeByIndex(fillTypeId).title;
             local myFillLevel = Utils.getNoNil(fillLevel, 0);
             lineInfo.fillLevel = g_i18n:formatNumber(myFillLevel, 0);
@@ -313,7 +361,6 @@ function BigDisplaySpecialization:updateDisplays(dt)
     end
     
     setTextVerticalAlignment(RenderText.VERTICAL_ALIGN_BASELINE)
-    setTextColor(spec.bigDisplays[1].color[1], spec.bigDisplays[1].color[2], spec.bigDisplays[1].color[3], spec.bigDisplays[1].color[4])
     
     for _, bigDisplay in pairs(spec.bigDisplays) do
     
@@ -349,7 +396,14 @@ function BigDisplaySpecialization:updateDisplays(dt)
                 local lineIndex = index + pageOffset;
                 if bigDisplay.lineInfos[lineIndex] ~= nil then
                     local lineInfo = bigDisplay.lineInfos[lineIndex];
-                    
+    
+                    local color = spec.bigDisplays[1].color;
+                    if spec.changedColors[lineInfo.fillTypeId] ~= nil then
+                        color = spec.changedColors[lineInfo.fillTypeId].color;
+                    end
+    
+                    setTextColor(color[1], color[2], color[3], color[4])
+    
                     setTextAlignment(RenderText.ALIGN_LEFT)
                     renderText3D(displayLine.text.x, displayLine.text.y, displayLine.text.z, displayLine.rx, displayLine.ry, displayLine.rz, spec.bigDisplays[1].textSize, lineInfo.title)
                     setTextAlignment(RenderText.ALIGN_RIGHT)
