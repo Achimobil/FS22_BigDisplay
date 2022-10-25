@@ -2,8 +2,8 @@
 Copyright (C) Achimobil & braeven, 2022
 
 Author: Achimobil
-Date: 22.07.2022
-Version: 0.1.0.1
+Date: 25.10.2022
+Version: 0.1.1.0
 
 Important:
 It is not allowed to copy in own Mods. Only usage as reference with Production Revamp.
@@ -11,10 +11,12 @@ No changes are to be made to this script without permission from Achimobil or br
 
 Darf nicht in eigene Mods kopiert werden. Darf nur über den Production Revamp Mod benutzt werden.
 An diesem Skript dürfen ohne Genehmigung von Achimobil oder braeven keine Änderungen vorgenommen werden.
+
+0.1.1.0 - 25.10.2022 - Add emptyFilltypes parameter from 112TEC
 ]]
 
 BigDisplaySpecialization = {
-    Version = "0.1.0.0",
+    Version = "0.1.1.0",
     Name = "BigDisplaySpecialization",
     displays = {}
 }
@@ -52,6 +54,7 @@ function BigDisplaySpecialization.registerXMLPaths(schema, basePath)
     schema:register(XMLValueType.COLOR, basePath .. ".bigDisplays.bigDisplay(?)#color", "Display text color");
     schema:register(XMLValueType.COLOR, basePath .. ".bigDisplays.bigDisplay(?)#colorHybrid", "Display text color");
     schema:register(XMLValueType.COLOR, basePath .. ".bigDisplays.bigDisplay(?)#colorInput", "Display text color");
+	schema:register(XMLValueType.BOOL, basePath .. ".bigDisplays.bigDisplay(?)#emptyFilltypes", "Display empty Filltypes", false)
     
     schema:setXMLSpecializationType();
 end
@@ -96,7 +99,8 @@ function BigDisplaySpecialization:onLoad(savegame)
         0.3,
         1
         }, true);
-        
+        local emptyFilltypes = xmlFile:getValue(bigDisplayKey .. "#emptyFilltypes", false)
+		
         local bigDisplay = {};
         bigDisplay.color = color;
         bigDisplay.colorHybrid = colorHybrid;
@@ -107,7 +111,8 @@ function BigDisplaySpecialization:onLoad(savegame)
         bigDisplay.lastPageTime = 0;
         bigDisplay.nodeId = upperLeftNode;
         bigDisplay.textDrawDistance = 30;
-        
+        bigDisplay.enmptyFilltypes = emptyFilltypes;
+		
         -- Mögliche zeilen anhand der Größe erstellen
         local lineHeight = size;
         -- local x, y, z = getWorldTranslation(upperLeftNode)
@@ -290,7 +295,7 @@ function BigDisplaySpecialization:getDistance(loadingStation, x, y, z)
 -- DebugUtil.printTableRecursively(placable,"_",0,2)
 	if loadingStation ~= nil then
 		local tx, ty, tz = getWorldTranslation(loadingStation.rootNode)
-        
+
         if tx == nil or ty == nil or tz == nil then
             -- fehlerhafte loadingstations deren position nicht ermitteln kann, ignorieren wir hier
             return math.huge
@@ -322,13 +327,17 @@ function BigDisplaySpecialization:updateDisplayData()
             lineInfo.title = g_fillTypeManager:getFillTypeByIndex(fillTypeId).title;
             local myFillLevel = Utils.getNoNil(fillLevel, 0);
             lineInfo.fillLevel = g_i18n:formatNumber(myFillLevel, 0);
-            
-            -- erst mal nur anzeigen wo auch was da ist?
-            if(myFillLevel ~= 0) then
-                table.insert(bigDisplay.lineInfos, lineInfo);
-            end
+			
+			if bigDisplay.enmptyFilltypes then
+				table.insert(bigDisplay.lineInfos, lineInfo);
+			else
+				-- erst mal nur anzeigen wo auch was da ist?
+				if(myFillLevel ~= 0) then 
+					table.insert(bigDisplay.lineInfos, lineInfo);
+				end 
+			end
         end
-        
+		
         table.sort(bigDisplay.lineInfos,compLineInfos)
     end
     
