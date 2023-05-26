@@ -12,7 +12,7 @@
         <rotation>0</rotation>
         <brand>FARMERTOOLS</brand>
         <species>placeable</species>
-        <category>misc</category>
+        <category>placeableMisc</category>
         <brush>
             <type>placeable</type>
             <category>buildings</category>
