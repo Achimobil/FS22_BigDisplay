@@ -5,3 +5,4 @@
 store\*.png
 images
 sourceModels
+*.md
