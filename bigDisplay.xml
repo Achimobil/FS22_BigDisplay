@@ -6,7 +6,7 @@
             <function>$l10n_function_unversalDisplay</function>
         </functions>
         <image>store/BigDisplay.dds</image>
-        <price>5000</price>
+        <price>15000</price>
         <lifetime>1000</lifetime>
         <dailyUpkeep>5</dailyUpkeep>
         <rotation>0</rotation>
