@@ -6,20 +6,25 @@
   </Asset>
 
   <Files>
-    <File fileId="3" filename="$data/shaders/vehicleShader.xml"/>
-    <File fileId="7" filename="$data/shared/clearPlastic_diffuse.dds"/>
+    <File fileId="3" filename="$data/shaders/buildingShader.xml"/>
+    <File fileId="9" filename="$data/shaders/vehicleShader.xml"/>
+    <File fileId="8" filename="$data/shared/clearPlastic_diffuse.dds"/>
   </Files>
 
 
   <Materials>
-    <Material name="case_mat" materialId="166" diffuseColor="0.0156863 0.0156863 0.0156863 1" specularColor="0.498039 1 0" customShaderId="3" customShaderVariation="colorMask">
-      <CustomParameter name="colorMat0" value="0.2 0.2 0.2 6"/>
+    <Material name="case_mat" materialId="5" diffuseColor="1 1 1 1" specularColor="0.494118 1 0" customShaderId="3" customShaderVariation="colorScale">
+      <CustomParameter name="dirtMossSmoothness" value="0.12 0.12 0 0.5"/>
+      <CustomParameter name="dirtMossMix" value="1 1 120000 0"/>
+      <CustomParameter name="placeableColorScale" value="1 1 1 1"/>
+      <CustomParameter name="snowScale" value="1 0 1 1"/>
+      <CustomParameter name="colorScale0" value="1 0 0 6"/>
     </Material>
-    <Material name="glass_mat" materialId="167" specularColor="0.498039 1 0" alphaBlending="true" customShaderId="3" customShaderVariation="colorMask">
-      <Texture fileId="7"/>
+    <Material name="glass_mat" materialId="6" specularColor="0.494118 1 0" alphaBlending="true" customShaderId="9" customShaderVariation="colorMask">
+      <Texture fileId="8"/>
       <CustomParameter name="colorMat0" value="0.1 0 0 2"/>
     </Material>
-    <Material name="i3d_default_material" materialId="168" diffuseColor="0.8 0.8 0.8 1" specularColor="0.6 1 0">
+    <Material name="i3d_default_material" materialId="7" diffuseColor="0.8 0.8 0.8 1" specularColor="0.6 1 0">
     </Material>
   </Materials>
 
@@ -32,15 +37,15 @@
   </Dynamics>
 
   <Scene>
-      <TransformGroup name="MediumDisplay" nodeId="173">
-        <TransformGroup name="display" translation="0 0 0.05" nodeId="174">
-          <Shape shapeId="1" name="Case" translation="0 0.5 0" static="true" clipDistance="100" nodeId="175" materialIds="166" castsShadows="true" receiveShadows="true">
-            <Shape shapeId="2" name="Glass" translation="0 -0.5 0" rotation="90 -0 0" clipDistance="100" nodeId="176" materialIds="167"/>
-            <TransformGroup name="displayStartPoint" translation="-0.945 0.915 0.089" nodeId="177"/>
+      <TransformGroup name="MediumDisplay" nodeId="12">
+        <TransformGroup name="display" translation="0 0 0.05" nodeId="13">
+          <Shape shapeId="1" name="Case" translation="0 0.5 0" static="true" clipDistance="100" nodeId="14" materialIds="5" castsShadows="true" receiveShadows="true">
+            <Shape shapeId="2" name="Glass" translation="0 -0.5 0" rotation="90 -0 0" clipDistance="100" nodeId="15" materialIds="6"/>
+            <TransformGroup name="displayStartPoint" translation="-0.945 0.915 0.089" nodeId="16"/>
           </Shape>
         </TransformGroup>
-        <TransformGroup name="functions" translation="0 0 0.05" nodeId="178">
-          <Shape shapeId="3" name="infoTriggerNode" translation="0 0 0.7" kinematic="true" compound="true" trigger="true" collisionMask="1048576" clipDistance="100" nodeId="179" materialIds="168" nonRenderable="true"/>
+        <TransformGroup name="functions" translation="0 0 0.05" nodeId="17">
+          <Shape shapeId="3" name="infoTriggerNode" translation="0 0 0.7" kinematic="true" compound="true" trigger="true" collisionMask="1048576" clipDistance="100" nodeId="18" materialIds="7" nonRenderable="true"/>
         </TransformGroup>
       </TransformGroup>
   </Scene>
