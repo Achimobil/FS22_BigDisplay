@@ -16,7 +16,7 @@ An diesem Skript dürfen ohne Genehmigung von Achimobil oder braeven keine Ände
 ]]
 
 BigDisplaySpecialization = {
-    Version = "0.1.1.0",
+    Version = "0.1.2.0",
     Name = "BigDisplaySpecialization",
     displays = {}
 }
@@ -201,13 +201,7 @@ function BigDisplaySpecialization:reconnectToStorage(savegame)
                 end
             end
         end
-        
-        if loadingStation ~= nil and loadingStation.owningPlaceable ~= nil then
-            if loadingStation.owningPlaceable.spec_husbandry ~= nil or loadingStation.owningPlaceable.spec_manureHeap ~= nil then
-                ignore = true;
-            end
-        end
-        
+                
         if loadingStation ~= nil then
             -- entfernung wie messen?
             local distance = BigDisplaySpecialization:getDistance(loadingStation, self.position.x, self.position.y, self.position.z)
@@ -276,6 +270,17 @@ function BigDisplaySpecialization:reconnectToStorage(savegame)
             end
         end
     end
+	
+	-- Futter bei Tierställen hinzufügen einfärben
+	if spec.loadingStationToUse.owningPlaceable ~= nil and spec.loadingStationToUse.owningPlaceable.spec_husbandryFood ~= nil then
+		local spec = self.spec_bigDisplay;
+		for fillType, fillLevel in pairs(spec.loadingStationToUse.owningPlaceable.spec_husbandryFood.fillLevels) do
+            if spec.changedColors[fillType] == nil then
+                spec.changedColors[fillType] = {isInput = false, isOutput = false};
+            end
+            spec.changedColors[fillType].color = spec.bigDisplays[1].colorInput;
+		end
+	end
     
     local storages = spec.loadingStationToUse.sourceStorages or spec.loadingStationToUse.targetStorages;
     
@@ -354,6 +359,13 @@ function BigDisplaySpecialization:getAllFillLevels(station, farmId)
 			for fillType, fillLevel in pairs(sourceStorage:getFillLevels()) do
 				fillLevels[fillType] = Utils.getNoNil(fillLevels[fillType], 0) + fillLevel
 			end
+		end
+	end
+	
+	-- Futter bei Tierställen hinzufügen
+	if station.owningPlaceable ~= nil and station.owningPlaceable.spec_husbandryFood ~= nil then
+		for fillType, fillLevel in pairs(station.owningPlaceable.spec_husbandryFood.fillLevels) do
+			fillLevels[fillType] = Utils.getNoNil(fillLevels[fillType], 0) + fillLevel;
 		end
 	end
 

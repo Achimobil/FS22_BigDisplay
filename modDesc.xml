@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<modDesc descVersion="67">
+<modDesc descVersion="74">
     <author>Achimobil</author>
-    <version>0.2.0.0</version>
+    <version>0.3.0.0_beta_1</version>
     <title>
         <de>Digitalanzeigen</de>
         <en>Digital Display</en>
@@ -17,7 +17,15 @@ Wenn also etwas näher platziert oder gelöscht wird, so wird die Anzeige noch d
 
 Skripte und Modelle fallen unter das Urheberrecht. Kopieren ganz oder in Teilen ist untersagt.
 
-Changelog 0.2.0.0
+Changelog 
+0.3.0.0
+- Loadingstations mit fehlerhafter position werden ignoriert
+- Wanddisplay rundungen überarbeitet und Farbwahl hinzugefügt
+- Tierställe werden nun in der Basis unterstützt
+- Distances der Wanddisplays angepasst
+- Misthaufen werden nun unterstützt. Anzeige aber erst bei nächster Füllstandsänderung möglich
+
+0.2.0.0
 - Clip distance eingestellt
 - Info Anzeige wem das Display gehört und womit es verbunden ist hinzugefügt
 - Wanddisplays in 3 Größen hinzugefügt
