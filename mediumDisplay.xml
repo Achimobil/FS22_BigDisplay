@@ -35,7 +35,9 @@
   <infoTrigger triggerNode="infoTriggerNode"/>
   <colorable>
     <colors>
+      <color value="0.2 0.2 0.2"/>
       <color value="0 0 0"/>
+      <color value="1 1 1"/>
       <color value="0.8671 0.6121 0.0430"/>
       <color value="0.0600 0.2801 0.0254"/>
       <color value="0.0478 0.4591 0.0846"/>
