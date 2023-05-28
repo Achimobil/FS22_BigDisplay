@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='utf-8'?>
+<placeable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="simplePlaceable" xsi:noNamespaceSchemaLocation="../../../../../shared/xml/schema/placeable.xsd">
+  <storeData>
+    <name>$l10n_storeItem_displayStand</name>
+    <functions>
+      <function>$l10n_function_displayStand</function>
+    </functions>
+    <image>store/store_displayStand.dds</image>
+    <price>250</price>
+    <dailyUpkeep>0</dailyUpkeep>
+    <lifetime>1000</lifetime>
+    <rotation>0</rotation>
+    <brand>FARMERTOOLS</brand>
+    <species>placeable</species>
+    <category>placeableMisc</category>
+    <brush>
+      <type>placeable</type>
+      <category>buildings</category>
+      <tab>tools</tab>
+    </brush>
+    <canBeSold>true</canBeSold>
+    <showInStore>true</showInStore>
+  </storeData>
+  <base>
+    <filename>placeable/DisplayStand.i3d</filename>
+  </base>
+  <placement useRandomYRotation="false" useManualYRotation="true">
+    <sounds>
+      <place template="smallImp" pitchScale="1.4"/>
+    </sounds>
+  </placement>
+  <clearAreas>
+    <clearArea startNode="clearArea1Start" widthNode="clearArea1Width" heightNode="clearArea1Height"/>
+  </clearAreas>
+  <leveling requireLeveling="true" maxSmoothDistance="1" maxSlope="75" maxEdgeAngle="30">
+    <levelAreas>
+      <levelArea startNode="levelArea1Start" widthNode="levelArea1Width" heightNode="levelArea1Height"/>
+    </levelAreas>
+  </leveling>
+  <indoorAreas/>
+  <tipOcclusionUpdateAreas>
+    <tipOcclusionUpdateArea startNode="tipOcclusionUpdateArea1Start" endNode="tipOcclusionUpdateArea1End"/>
+  </tipOcclusionUpdateAreas>
+  <ai>
+    <updateAreas>
+      <updateArea startNode="tipOcclusionUpdateArea1Start" endNode="tipOcclusionUpdateArea1End"/>
+    </updateAreas>
+  </ai>
+  <colorable>
+    <colors>
+      <color value="0.2 0.2 0.2"/>
+      <color value="0 0 0"/>
+      <color value="1 1 1"/>
+      <color value="0.8671 0.6121 0.0430"/>
+      <color value="0.0600 0.2801 0.0254"/>
+      <color value="0.0478 0.4591 0.0846"/>
+      <color value="0.9743 0.9743 0.0111"/>
+      <color value="0.0189 0.1332 0.1975"/>
+      <color value="0 0.212 0.5795"/>
+      <color value="0 0.1253 0.5068"/>
+      <color value="1 0.1975 0.0278"/>
+      <!-- Für die Mädels -->
+      <color value="0.8879 0.0545 0.3005"/>
+      <color value="1.0000 0.2195 0.6524"/>
+    </colors>
+    <nodes>
+      <node node="Cylinder"/>
+    </nodes>
+  </colorable>
+  <i3dMappings>
+    <i3dMapping id="clearArea1Start" node="0>0|0"/>
+    <i3dMapping id="clearArea1Height" node="0>0|0|0"/>
+    <i3dMapping id="clearArea1Width" node="0>0|0|1"/>
+    <i3dMapping id="levelArea1Start" node="0>1|0"/>
+    <i3dMapping id="levelArea1Height" node="0>1|0|0"/>
+    <i3dMapping id="levelArea1Width" node="0>1|0|1"/>
+    <i3dMapping id="tipOcclusionUpdateArea1Start" node="0>2|0"/>
+    <i3dMapping id="tipOcclusionUpdateArea1End" node="0>2|0|0"/>
+    <i3dMapping id="Cylinder" node="0>3|0"/>
+  </i3dMappings>
+</placeable>

@@ -24,6 +24,7 @@ Changelog
 - Tierställe werden nun in der Basis unterstützt
 - Distances der Wanddisplays angepasst
 - Misthaufen werden nun unterstützt. Anzeige aber erst bei nächster Füllstandsänderung möglich
+- Mast zum anbringen der Wanddisplays mit Farbwahl hinzugefügt
 
 0.2.0.0
 - Clip distance eingestellt
@@ -51,6 +52,7 @@ Changelog 0.2.0.0
     <multiplayer supported="true"/>
     <iconFilename>icon.dds</iconFilename>
     <storeItems>
+        <storeItem xmlFilename="displayStand.xml"/>
         <storeItem xmlFilename="XtraSmallDisplay.xml"/>
         <storeItem xmlFilename="smallDisplay.xml"/>
         <storeItem xmlFilename="mediumDisplay.xml"/>
