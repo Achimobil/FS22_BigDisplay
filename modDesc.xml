@@ -56,6 +56,7 @@ Changelog 0.2.0.0
         <storeItem xmlFilename="XtraSmallDisplay.xml"/>
         <storeItem xmlFilename="smallDisplay.xml"/>
         <storeItem xmlFilename="mediumDisplay.xml"/>
+        <storeItem xmlFilename="bigWallDisplay.xml"/>
         <storeItem xmlFilename="bigDisplay.xml"/>
     </storeItems>
     <brands>
