@@ -24,7 +24,7 @@
     <canBeRenamed>true</canBeRenamed>
   </base>
   <bigDisplays>
-    <bigDisplay upperLeftNode="displayStartPoint" height="2.80" width="3.89" size="0.11" color="0 0.9 0 1"/>
+    <bigDisplay upperLeftNode="displayStartPoint" height="2.80" width="3.89" size="0.11" color="0 0.9 0 1" columns="2" emptyFilltypes="false"/>
   </bigDisplays>
   <clearAreas/>
   <leveling requireLeveling="false"/>

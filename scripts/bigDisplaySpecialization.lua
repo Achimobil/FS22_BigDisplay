@@ -1,9 +1,9 @@
 --[[
-Copyright (C) Achimobil & braeven, 2022
+Copyright (C) Achimobil, 2022-2023
 
 Author: Achimobil
-Date: 25.10.2022
-Version: 0.1.1.0
+Date: 28.05.2023
+Version: 0.1.3.0
 
 Important:
 It is not allowed to copy in own Mods. Only usage as reference with Production Revamp.
@@ -13,10 +13,12 @@ Darf nicht in eigene Mods kopiert werden. Darf nur über den Production Revamp M
 An diesem Skript dürfen ohne Genehmigung von Achimobil oder braeven keine Änderungen vorgenommen werden.
 
 0.1.1.0 - 25.10.2022 - Add emptyFilltypes parameter from 112TEC
+0.1.3.0 - 27.05.2023 - Add support for manure heaps and husbandaries
+0.1.3.0 - 28.05.2023 - Add support for multiple columns for the display area
 ]]
 
 BigDisplaySpecialization = {
-    Version = "0.1.2.0",
+    Version = "0.1.3.0",
     Name = "BigDisplaySpecialization",
     displays = {}
 }
@@ -55,6 +57,7 @@ function BigDisplaySpecialization.registerXMLPaths(schema, basePath)
     schema:register(XMLValueType.COLOR, basePath .. ".bigDisplays.bigDisplay(?)#colorHybrid", "Display text color");
     schema:register(XMLValueType.COLOR, basePath .. ".bigDisplays.bigDisplay(?)#colorInput", "Display text color");
 	schema:register(XMLValueType.BOOL, basePath .. ".bigDisplays.bigDisplay(?)#emptyFilltypes", "Display empty Filltypes", false)
+	schema:register(XMLValueType.INT, basePath .. ".bigDisplays.bigDisplay(?)#columns", "Number of columns the display is splittet to", 1)
     
     schema:setXMLSpecializationType();
 end
@@ -100,6 +103,7 @@ function BigDisplaySpecialization:onLoad(savegame)
         1
         }, true);
         local emptyFilltypes = xmlFile:getValue(bigDisplayKey .. "#emptyFilltypes", false)
+        local columns = xmlFile:getValue(bigDisplayKey .. "#columns", 1)
 		
         local bigDisplay = {};
         bigDisplay.color = color;
@@ -112,37 +116,49 @@ function BigDisplaySpecialization:onLoad(savegame)
         bigDisplay.nodeId = upperLeftNode;
         bigDisplay.textDrawDistance = 30;
         bigDisplay.enmptyFilltypes = emptyFilltypes;
+        bigDisplay.columns = columns;
 		
-        -- Mögliche zeilen anhand der Größe erstellen
-        local lineHeight = size;
-        -- local x, y, z = getWorldTranslation(upperLeftNode)
-        local rx, ry, rz = getWorldRotation(upperLeftNode)
-        for currentY = -size/2, -height-(size/2), -lineHeight do
-        
-            local displayLine = {};
-            displayLine.text = {}
-            displayLine.value = {}
-            
-            local x,y,z = localToWorld(upperLeftNode, 0, currentY, 0);
-            displayLine.text.x = x;
-            displayLine.text.y = y;
-            displayLine.text.z = z;
-            
-            local x,y,z = localToWorld(upperLeftNode, width, currentY, 0);
-            displayLine.value.x = x;
-            displayLine.value.y = y;
-            displayLine.value.z = z;
-            
-            displayLine.rx = rx;
-            displayLine.ry = ry;
-            displayLine.rz = rz;
-            
-            table.insert(bigDisplay.displayLines, displayLine);
-        end
-        
-        table.insert(spec.bigDisplays, bigDisplay);
-                
-        i = i + 1;
+		-- breite pro Spalte berechnen
+		local columnWidth = (width - (0.05 * (columns - 1))) / columns;
+		
+		-- schleife pro spalte
+		for currentColumn = 1, columns do
+		
+			-- linker startpunkt für die Schrift
+			local leftStart = 0 + ((columnWidth + 0.05) * (currentColumn - 1))
+			local rightStart = width - ((columnWidth + 0.05) * (columns - currentColumn))
+		
+			-- Mögliche zeilen anhand der Größe erstellen
+			local lineHeight = size;
+			-- local x, y, z = getWorldTranslation(upperLeftNode)
+			local rx, ry, rz = getWorldRotation(upperLeftNode)
+			for currentY = -size/2, -height-(size/2), -lineHeight do
+			
+				local displayLine = {};
+				displayLine.text = {}
+				displayLine.value = {}
+				
+				local x,y,z = localToWorld(upperLeftNode, leftStart, currentY, 0);
+				displayLine.text.x = x;
+				displayLine.text.y = y;
+				displayLine.text.z = z;
+				
+				local x,y,z = localToWorld(upperLeftNode, rightStart, currentY, 0);
+				displayLine.value.x = x;
+				displayLine.value.y = y;
+				displayLine.value.z = z;
+				
+				displayLine.rx = rx;
+				displayLine.ry = ry;
+				displayLine.rz = rz;
+				
+				table.insert(bigDisplay.displayLines, displayLine);
+			end
+		end
+			
+		table.insert(spec.bigDisplays, bigDisplay);
+				
+		i = i + 1;
     end
 
     function spec.fillLevelChangedCallback(fillType, delta)
