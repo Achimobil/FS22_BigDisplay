@@ -39,9 +39,9 @@
   <Scene>
       <TransformGroup name="MediumDisplay" nodeId="12">
         <TransformGroup name="display" translation="0 0 0.05" nodeId="13">
-          <Shape shapeId="1" name="Case" translation="0 1.25 0" static="true" clipDistance="100" nodeId="14" materialIds="5" castsShadows="true" receiveShadows="true">
+          <Shape shapeId="1" name="Case" translation="0 0.5 0" static="true" clipDistance="100" nodeId="14" materialIds="5" castsShadows="true" receiveShadows="true">
             <Shape shapeId="2" name="Glass" translation="0 -0.5 0" rotation="90 -0 0" clipDistance="100" nodeId="15" materialIds="6"/>
-            <TransformGroup name="displayStartPoint" translation="-0.945 1.615 0.089" nodeId="16"/>
+            <TransformGroup name="displayStartPoint" translation="-0.945 2.415 0.089" nodeId="16"/>
           </Shape>
         </TransformGroup>
         <TransformGroup name="functions" translation="0 0 0.05" nodeId="17">

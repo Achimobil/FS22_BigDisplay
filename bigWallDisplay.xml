@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <placeable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="bigDisplayType" xsi:noNamespaceSchemaLocation="../../../../shared/xml/schema/placeable.xsd">
   <storeData>
-    <name params="25">$l10n_unversalDisplay</name>
+    <name params="26">$l10n_unversalDisplay</name>
     <functions>
       <function>$l10n_function_unversalDisplay</function>
     </functions>
@@ -24,7 +24,7 @@
     <canBeRenamed>true</canBeRenamed>
   </base>
   <bigDisplays>
-    <bigDisplay upperLeftNode="displayStartPoint" height="2.70" width="1.89" size="0.11" color="0 0.9 0 1"/>
+    <bigDisplay upperLeftNode="displayStartPoint" height="2.80" width="1.89" size="0.11" color="0 0.9 0 1"/>
   </bigDisplays>
   <clearAreas/>
   <leveling requireLeveling="false"/>

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="74">
     <author>Achimobil</author>
-    <version>0.3.0.0_beta_1</version>
+    <version>0.3.0.0_beta_2</version>
     <title>
         <de>Digitalanzeigen</de>
         <en>Digital Display</en>
@@ -25,6 +25,7 @@ Changelog
 - Distances der Wanddisplays angepasst
 - Misthaufen werden nun unterstützt. Anzeige aber erst bei nächster Füllstandsänderung möglich
 - Mast zum anbringen der Wanddisplays mit Farbwahl hinzugefügt
+- 26 zeiliges Wand Display hinzugefügt
 
 0.2.0.0
 - Clip distance eingestellt
