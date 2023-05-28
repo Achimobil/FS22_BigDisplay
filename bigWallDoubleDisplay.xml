@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<placeable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="bigDisplayType" xsi:noNamespaceSchemaLocation="../../../../shared/xml/schema/placeable.xsd">
+  <storeData>
+    <name params="52">$l10n_unversalDisplay</name>
+    <functions>
+      <function>$l10n_function_unversalDisplay</function>
+    </functions>
+    <image>store/store_bigWallDoubleDisplay.dds</image>
+    <price>8000</price>
+    <lifetime>1000</lifetime>
+    <dailyUpkeep>5</dailyUpkeep>
+    <rotation>0</rotation>
+    <brand>FARMERTOOLS</brand>
+    <species>placeable</species>
+    <category>placeableMisc</category>
+    <brush>
+      <type>placeable</type>
+      <category>buildings</category>
+      <tab>tools</tab>
+    </brush>
+  </storeData>
+  <base>
+    <filename>placeable/bigWallDoubleDisplay.i3d</filename>
+    <canBeRenamed>true</canBeRenamed>
+  </base>
+  <bigDisplays>
+    <bigDisplay upperLeftNode="displayStartPoint" height="2.80" width="3.89" size="0.11" color="0 0.9 0 1"/>
+  </bigDisplays>
+  <clearAreas/>
+  <leveling requireLeveling="false"/>
+  <indoorAreas/>
+  <ai>
+    <updateAreas/>
+  </ai>
+  <infoTrigger triggerNode="infoTriggerNode"/>
+  <colorable>
+    <colors>
+      <color value="0.2 0.2 0.2"/>
+      <color value="0 0 0"/>
+      <color value="1 1 1"/>
+      <color value="0.8671 0.6121 0.0430"/>
+      <color value="0.0600 0.2801 0.0254"/>
+      <color value="0.0478 0.4591 0.0846"/>
+      <color value="0.9743 0.9743 0.0111"/>
+      <color value="0.0189 0.1332 0.1975"/>
+      <color value="0 0.212 0.5795"/>
+      <color value="0 0.1253 0.5068"/>
+      <color value="1 0.1975 0.0278"/>
+      <!-- Für die Mädels -->
+      <color value="0.8879 0.0545 0.3005"/>
+      <color value="1.0000 0.2195 0.6524"/>
+    </colors>
+    <nodes>
+      <node node="Case"/>
+    </nodes>
+  </colorable>
+  <i3dMappings>
+    <i3dMapping id="display" node="0>0"/>
+    <i3dMapping id="Case" node="0>0|0"/>
+    <i3dMapping id="Glass" node="0>0|0|0"/>
+    <i3dMapping id="displayStartPoint" node="0>0|0|1"/>
+    <i3dMapping id="infoTriggerNode" node="0>1|0"/>
+  </i3dMappings>
+</placeable>
