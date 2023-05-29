@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="74">
     <author>Achimobil</author>
-    <version>0.3.0.0_beta_2</version>
+    <version>0.3.0.0</version>
     <title>
         <de>Digitalanzeigen</de>
         <en>Digital Display</en>
@@ -44,7 +44,18 @@ So if something is placed closer or deleted, the display will still show the old
 
 Scripts and models fall under copyright. Copying in whole or in part is prohibited.
 
-Changelog 0.2.0.0
+Changelog 
+0.2.0.0
+- Loadingstations with wrong position are ignored
+- Wall display roundings revised and color selection added
+- Animal pens are now supported in the base
+- Distances of wall displays adjusted
+- Dung piles are now supported. Display only possible at next level change
+- Added stand for wall displays with color selection
+- 26 line wall display added
+- 26 line wall display with double width and display in 2 columns added
+
+0.2.0.0
 - Clip distance changes
 - Added info about who owns the display and what it is connected to.
 - Added wall displays in 3 sizes
