@@ -63,7 +63,7 @@ Changelog
         </en>
     </description>
     <multiplayer supported="true"/>
-    <iconFilename>icon.dds</iconFilename>
+    <iconFilename>icon_bigDisplay.dds</iconFilename>
     <storeItems>
         <storeItem xmlFilename="displayStand.xml"/>
         <storeItem xmlFilename="XtraSmallDisplay.xml"/>
@@ -74,7 +74,7 @@ Changelog
         <storeItem xmlFilename="bigDisplay.xml"/>
     </storeItems>
     <brands>
-        <brand name="FARMERTOOLS" title="Farmer Tools" image="store/FarmerTools.dds"/>
+        <brand name="FARMERTOOLS" title="Farmer Tools" image="store/brand_FarmerTools.dds"/>
     </brands>
 
     <placeableSpecializations>
