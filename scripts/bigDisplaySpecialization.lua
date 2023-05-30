@@ -26,7 +26,6 @@ print(g_currentModName .. " - init " .. BigDisplaySpecialization.Name .. "(Versi
 
 function BigDisplaySpecialization.prerequisitesPresent(specializations)
     return true;
-    -- return SpecializationUtil.hasSpecialization(PlaceableSilo, specializations);
 end
 
 function BigDisplaySpecialization.registerEventListeners(placeableType)
@@ -303,8 +302,6 @@ function BigDisplaySpecialization:reconnectToStorage(savegame)
     for _, sourceStorage in pairs(storages) do
         sourceStorage:addFillLevelChangedListeners(spec.fillLevelChangedCallback);
     end
-
-    -- table.insert(BigDisplaySpecialization.displays, self);
 end
 
 function BigDisplaySpecialization:onDelete()
