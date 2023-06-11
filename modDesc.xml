@@ -100,12 +100,12 @@ Modifying and re-uploading in whole or in part is not allowed!]]>
         <text name="storeItem_displayStand"> 
             <de>Mast für die Wanddisplays</de>
             <en>Mast for the wall displays</en>
-            <ru>Мачта для настенных дисплеев</ru>
+            <ru>Столб для дисплеев</ru>
         </text>
         <text name="function_displayStand"> 
             <de>An diesen Mast können die Wanddisplays angebracht werden, wenn keine Fläche am Gebäude geeignet ist</de>
             <en>The wall displays can be attached to this mast if there is no suitable surface on the building.</en>
-            <ru>Настенные дисплеи могут быть закреплены на этой мачте, если на здании нет подходящей поверхности.</ru>
+            <ru>Дисплеи могут быть закреплены на этом столбе, если на здании нет подходящей поверхности.</ru>
         </text>
     </l10n>
 </modDesc>
