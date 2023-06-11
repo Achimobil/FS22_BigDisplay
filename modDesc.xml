@@ -21,6 +21,7 @@ Changelog
 - Copyright text erste Zeile entfernt
 - Storeicons umbenannt
 - Beim löschen des aktuellen Anzeigeziels wird ein reconnect gemacht
+- Mast ist jetzt ein Deco-Objekt und verändert das Gelände nicht mehr beim Platzieren
 
 0.3.0.0
 - Loadingstations mit fehlerhafter position werden ignoriert
@@ -87,6 +88,9 @@ Changelog
         <type name="bigDisplayType" parent="simplePlaceable" filename="$dataS/scripts/placeables/Placeable.lua">
             <specialization name="bigDisplay"/>
             <specialization name="infoTrigger" />
+        </type>
+        <type name="colorDecoObject" parent="decoObject" filename="$dataS/scripts/placeables/Placeable.lua">
+            <specialization name="colorable"/>
         </type>
     </placeableTypes>
     
