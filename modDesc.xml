@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="75">
     <author>Achimobil</author>
-    <version>0.3.0.0</version>
+    <version>0.4.0.0</version>
     <title>
         <de>Digitalanzeigen</de>
         <en>Digital Display</en>
@@ -16,6 +16,12 @@ Beim Spielstart sucht sich das Display das nächstgelegene Ziel zur Anzeige.
 Wenn also etwas näher platziert oder gelöscht wird, so wird die Anzeige noch den alten Wert anzeigen.
 
 Changelog 
+0.4.0.0
+- Moddesk anpassung auf 75
+- Copyright text erste Zeile entfernt
+- Storeicons umbenannt
+- Beim löschen des aktuellen Anzeigeziels wird ein reconnect gemacht
+
 0.3.0.0
 - Loadingstations mit fehlerhafter position werden ignoriert
 - Wanddisplay rundungen überarbeitet und Farbwahl hinzugefügt
