@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<modDesc descVersion="74">
+<modDesc descVersion="75">
     <author>Achimobil</author>
     <version>1.0.0.0</version>
     <title>
@@ -27,7 +27,6 @@ Preis für Mast: 250€
 
 Fehler oder Verbesserungsvorschläge bitte auf <a href="https://github.com/Achimobil/FS22_BigDisplay">Github</a> melden.
 
-Skripte und Modelle fallen unter das Urheberrecht. Kopieren ganz oder in Teilen ist untersagt.
 Upload auf anderen Seiten nur durch mich selbst, Verlinkung nur mit Original Downloadlink. KEIN Ersatzlink!
 Das verändern oder erneutes hochladen, ob ganz oder in Teilen ist nicht gestattet!]]>
         </de>
@@ -50,7 +49,6 @@ Price per pole: 250$
 
 Please report bugs or suggestions for improvement on <a href="https://github.com/Achimobil/FS22_BigDisplay">Github</a>.
 
-Scripts and models fall under copyright. Copying in whole or in part is prohibited.
 Upload on other sites only by myself, linking only with original download link. NO substitute link!
 Modifying and re-uploading in whole or in part is not allowed!]]>
         </en>
@@ -78,6 +76,9 @@ Modifying and re-uploading in whole or in part is not allowed!]]>
         <type name="bigDisplayType" parent="simplePlaceable" filename="$dataS/scripts/placeables/Placeable.lua">
             <specialization name="bigDisplay"/>
             <specialization name="infoTrigger" />
+        </type>
+        <type name="colorDecoObject" parent="decoObject" filename="$dataS/scripts/placeables/Placeable.lua">
+            <specialization name="colorable"/>
         </type>
     </placeableTypes>
     

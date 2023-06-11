@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<placeable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="simplePlaceable" xsi:noNamespaceSchemaLocation="../../../../../shared/xml/schema/placeable.xsd">
+<placeable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="colorDecoObject" xsi:noNamespaceSchemaLocation="../../../../../shared/xml/schema/placeable.xsd">
   <storeData>
     <name>$l10n_storeItem_displayStand</name>
     <functions>
@@ -29,18 +29,6 @@
       <place template="smallImp" pitchScale="1.4"/>
     </sounds>
   </placement>
-  <clearAreas>
-    <clearArea startNode="clearArea1Start" widthNode="clearArea1Width" heightNode="clearArea1Height"/>
-  </clearAreas>
-  <leveling requireLeveling="true" maxSmoothDistance="1" maxSlope="75" maxEdgeAngle="30">
-    <levelAreas>
-      <levelArea startNode="levelArea1Start" widthNode="levelArea1Width" heightNode="levelArea1Height"/>
-    </levelAreas>
-  </leveling>
-  <indoorAreas/>
-  <tipOcclusionUpdateAreas>
-    <tipOcclusionUpdateArea startNode="tipOcclusionUpdateArea1Start" endNode="tipOcclusionUpdateArea1End"/>
-  </tipOcclusionUpdateAreas>
   <ai>
     <updateAreas>
       <updateArea startNode="tipOcclusionUpdateArea1Start" endNode="tipOcclusionUpdateArea1End"/>

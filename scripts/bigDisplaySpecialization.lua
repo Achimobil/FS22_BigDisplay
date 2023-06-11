@@ -2,8 +2,8 @@
 Copyright (C) Achimobil, 2022-2023
 
 Author: Achimobil
-Date: 28.05.2023
-Version: 0.1.3.0
+Date: 11.06.2023
+Version: 0.1.4.0
 
 Important:
 It is not allowed to copy in own Mods. Only usage as reference with Production Revamp.
@@ -15,6 +15,7 @@ An diesem Skript dürfen ohne Genehmigung von Achimobil oder braeven keine Ände
 0.1.1.0 - 25.10.2022 - Add emptyFilltypes parameter from 112TEC
 0.1.3.0 - 27.05.2023 - Add support for manure heaps and husbandaries
 0.1.3.0 - 28.05.2023 - Add support for multiple columns for the display area
+0.1.4.0 - 11.06.2023 - Make reconnect when current display target is sold
 ]]
 
 BigDisplaySpecialization = {
@@ -39,6 +40,7 @@ function BigDisplaySpecialization.registerFunctions(placeableType)
     SpecializationUtil.registerFunction(placeableType, "updateDisplays", BigDisplaySpecialization.updateDisplays);
     SpecializationUtil.registerFunction(placeableType, "updateDisplayData", BigDisplaySpecialization.updateDisplayData);
     SpecializationUtil.registerFunction(placeableType, "reconnectToStorage", BigDisplaySpecialization.reconnectToStorage);
+    SpecializationUtil.registerFunction(placeableType, "onStationDeleted", BigDisplaySpecialization.onStationDeleted);
 end
 
 function BigDisplaySpecialization.registerOverwrittenFunctions(placeableType)
@@ -185,6 +187,7 @@ function BigDisplaySpecialization:reconnectToStorage(savegame)
         for _, sourceStorage in pairs(storages) do
             sourceStorage:removeFillLevelChangedListeners(spec.fillLevelChangedCallback);
         end
+		spec.loadingStationToUse:removeDeleteListener(self, "onStationDeleted")
         spec.loadingStationToUse = nil;
     end
     
@@ -302,6 +305,12 @@ function BigDisplaySpecialization:reconnectToStorage(savegame)
     for _, sourceStorage in pairs(storages) do
         sourceStorage:addFillLevelChangedListeners(spec.fillLevelChangedCallback);
     end
+	
+	spec.loadingStationToUse:addDeleteListener(self, "onStationDeleted")
+end
+
+function BigDisplaySpecialization:onStationDeleted(station)
+	self:reconnectToStorage();
 end
 
 function BigDisplaySpecialization:onDelete()
