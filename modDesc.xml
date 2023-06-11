@@ -15,8 +15,6 @@ Automatische Paging bei vielen Inhalten.
 Beim Spielstart sucht sich das Display das nächstgelegene Ziel zur Anzeige.
 Wenn also etwas näher platziert oder gelöscht wird, so wird die Anzeige noch den alten Wert anzeigen.
 
-Skripte und Modelle fallen unter das Urheberrecht. Kopieren ganz oder in Teilen ist untersagt.
-
 Changelog 
 0.3.0.0
 - Loadingstations mit fehlerhafter position werden ignoriert
@@ -41,8 +39,6 @@ Automatic paging when there is a lot of content.
 
 When the game starts, the display looks for the closest target to display.
 So if something is placed closer or deleted, the display will still show the old value.
-
-Scripts and models fall under copyright. Copying in whole or in part is prohibited.
 
 Changelog 
 0.2.0.0
