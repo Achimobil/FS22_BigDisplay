@@ -1,43 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="75">
     <author>Achimobil</author>
-    <version>0.4.0.0</version>
+    <version>1.0.0.0</version>
     <title>
         <de>Digitalanzeigen</de>
         <en>Digital Display</en>
     </title>
     <description>
         <de>
-            <![CDATA[Digitalanzeige für die nächste Produktion oder das Lager.
+            <![CDATA[Digitalanzeige für die nächste Produktion, Mithaufen, Tierställen oder das Lager.
 Zeigt alle Inhalte alphabetisch (lua) sortiert an.
 Automatische Paging bei vielen Inhalten.
 
-Beim Spielstart sucht sich das Display das nächstgelegene Ziel zur Anzeige.
+Beim Spielstart und platzieren sucht sich das Display das nächstgelegene Ziel zur Anzeige.
 Wenn also etwas näher platziert oder gelöscht wird, so wird die Anzeige noch den alten Wert anzeigen.
+Bei den Misthaufen wird der inhalt nach Spielstart erst mit der näcshten vollen Stunde angezeigt.
 
-Changelog 
-0.4.0.0
-- Moddesk anpassung auf 75
-- Copyright text erste Zeile entfernt
-- Storeicons umbenannt
-- Beim löschen des aktuellen Anzeigeziels wird ein reconnect gemacht
-- Mast ist jetzt ein Deco-Objekt und verändert das Gelände nicht mehr beim Platzieren
+Enthalten ist ein klobiges Stand Display und mehrere Wanddisplays Mit 3 bis 26 Zeilen anzeige.
+Hinzu kommt noch ein 26 Zeiliges Wanddisplay mit doppelter Breite und somit 52 Anzeigbaren Inhalten.
+Für die Wanddiplays ist auch ein Mast dabei, wenn das Gebäude keine geeignete Fläche hat zum platzieren.
+Wanddisplays und der Mast haben Farbwahl.
 
-0.3.0.0
-- Loadingstations mit fehlerhafter position werden ignoriert
-- Wanddisplay rundungen überarbeitet und Farbwahl hinzugefügt
-- Tierställe werden nun in der Basis unterstützt
-- Distances der Wanddisplays angepasst
-- Misthaufen werden nun unterstützt. Anzeige aber erst bei nächster Füllstandsänderung möglich
-- Mast zum anbringen der Wanddisplays mit Farbwahl hinzugefügt
-- 26 zeiliges Wand Display hinzugefügt
-- 26 zeiliges Wand Display mit doppelter Breite und Anzeige in 2 Spalten eingefügt
+Preis pro Display: 3.000€ bis 20.000€
+Unterhalt pro Monat: 5€
+Preis für Mast: 250€
 
-0.2.0.0
-- Clip distance eingestellt
-- Info Anzeige wem das Display gehört und womit es verbunden ist hinzugefügt
-- Wanddisplays in 3 Größen hinzugefügt
-- Bei Produktionen haben Inputs, Outputs und Hybride nun eine unterschiedliche Farbe. Es bleibt gesamt Alphabetisch sortiert.]]>
+Fehler oder Verbesserungsvorschläge bitte auf <a href="https://github.com/Achimobil/FS22_BigDisplay">Github</a> melden.
+
+Upload auf anderen Seiten nur durch mich selbst, Verlinkung nur mit Original Downloadlink. KEIN Ersatzlink!
+Das verändern oder erneutes hochladen, ob ganz oder in Teilen ist nicht gestattet!]]>
         </de>
         <en>
             <![CDATA[Digital display for the next production or warehouse.
@@ -47,22 +38,19 @@ Automatic paging when there is a lot of content.
 When the game starts, the display looks for the closest target to display.
 So if something is placed closer or deleted, the display will still show the old value.
 
-Changelog 
-0.2.0.0
-- Loadingstations with wrong position are ignored
-- Wall display roundings revised and color selection added
-- Animal pens are now supported in the base
-- Distances of wall displays adjusted
-- Dung piles are now supported. Display only possible at next level change
-- Added stand for wall displays with color selection
-- 26 line wall display added
-- 26 line wall display with double width and display in 2 columns added
+Included is a chunky stand display and several wall displays with 3 to 26 lines display.
+In addition, there is a 26-line wall display with double width and thus 52 displayable content.
+For the wall displays is also a pole included, if the building has no suitable area to place.
+The wall displays and the pole has color choice.
 
-0.2.0.0
-- Clip distance changes
-- Added info about who owns the display and what it is connected to.
-- Added wall displays in 3 sizes
-- For productions the inputs, outputs and hybrids now have a different color. It remains sorted alphabetically.]]>
+Price per display: 3.000$ to 20.000$
+Maintenance per month: 5$
+Price per pole: 250$
+
+Please report bugs or suggestions for improvement on <a href="https://github.com/Achimobil/FS22_BigDisplay">Github</a>.
+
+Upload on other sites only by myself, linking only with original download link. NO substitute link!
+Modifying and re-uploading in whole or in part is not allowed!]]>
         </en>
     </description>
     <multiplayer supported="true"/>
