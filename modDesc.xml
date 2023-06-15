@@ -5,6 +5,7 @@
     <title>
         <de>Digitalanzeigen</de>
         <en>Digital Display</en>
+        <cz>Digitální displej</cz>
     </title>
     <description>
         <de>
@@ -52,6 +53,28 @@ Please report bugs or suggestions for improvement on <a href="https://github.com
 Upload on other sites only by myself, linking only with original download link. NO substitute link!
 Modifying and re-uploading in whole or in part is not allowed!]]>
         </en>
+        <cz>
+            <![CDATA[Digitální displej pro další výrobu nebo sklad.
+Zobrazí veškerý obsah seřazený podle abecedy (lua).
+Automatické stránkování při velkém množství obsahu.
+
+Po spuštění hry se na displeji vyhledá nejbližší cíl, který se má zobrazit.
+Pokud je tedy něco umístěno blíže nebo odstraněno, displej bude stále zobrazovat starou hodnotu.
+
+Součástí je robustní stojan a několik nástěnných stojanů se zobrazením 3 až 26 řádků.
+Kromě toho je k dispozici 26-řádkový nástěnný displej s dvojnásobnou šířkou a tedy 52 zobrazitelnými obsahy.
+Pro nástěnné displeje je součástí dodávky také sloupek, pokud v budově není vhodná plocha k umístění.
+Nástěnné displeje i sloupek mají možnost volby barvy.
+
+Cena za displej: 3 000 až 20 000 dolarů
+Údržba za měsíc: 5 dolarů
+Cena za sloup: 250 dolarů
+
+Nahlaste prosím chyby nebo návrhy na zlepšení na <a href="https://github.com/Achimobil/FS22_BigDisplay">Github</a>.
+
+Nahrávání na jiné stránky pouze mnou, odkazování pouze s původním odkazem ke stažení. ŽÁDNÝ náhradní odkaz!
+Úprava a opětovné nahrávání vcelku nebo po částech není povoleno.!]]>
+        </cz>
     </description>
     <multiplayer supported="true"/>
     <iconFilename>icon_bigDisplay.dds</iconFilename>
@@ -87,26 +110,31 @@ Modifying and re-uploading in whole or in part is not allowed!]]>
             <de>Universal Anzeige (%s Zeilen)</de> 
             <en>Universal Display (%s Lines)</en>
             <ru>Универсальный дисплей (%s Строк)</ru>
+            <cz>Univerzální displej (%s Řádky)</cz>
         </text>
         <text name="function_unversalDisplay"> 
             <de>Digitalanzeige für die nächste Produktion oder das Lager. Zeigt alle Inhalte alphabetisch (lua) sortiert an. Automatische Paging bei vielen Inhalten.</de>
             <en>Digital display for the next production or warehouse. Displays all content sorted alphabetically (lua). Automatic paging when there is a lot of content.</en>
             <ru>Цифровой дисплей для ближайшего производства или склада. Отображает всё содержимое, отсортированное в алфавитном порядке. Автоматическая прокрутка для длинного списка.</ru>
+            <cz>Digitální displej pro další výrobu nebo sklad. Zobrazuje veškerý obsah seřazený podle abecedy (lua). Automatické stránkování při velkém množství obsahu.</cz>
         </text>
         <text name="bigDisplay_connected_with"> 
             <de>Verbundenn mit</de>
             <en>Connected with</en>
             <ru>Подключён к</ru>
+            <cz>Spojeno s</cz>
         </text>
         <text name="storeItem_displayStand"> 
             <de>Mast für die Wanddisplays</de>
             <en>Mast for the wall displays</en>
             <ru>Столб для дисплеев</ru>
+            <cz>Stojan pro nástěnné displeje</cz>
         </text>
         <text name="function_displayStand"> 
             <de>An diesen Mast können die Wanddisplays angebracht werden, wenn keine Fläche am Gebäude geeignet ist</de>
             <en>The wall displays can be attached to this mast if there is no suitable surface on the building.</en>
             <ru>Дисплеи могут быть закреплены на этом столбе, если на здании нет подходящей поверхности.</ru>
+            <cz>Pokud na budově není vhodná plocha, lze na tento stojan připevnit nástěnné displeje.</cz>
         </text>
     </l10n>
 </modDesc>
