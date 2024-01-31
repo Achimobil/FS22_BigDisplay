@@ -16,14 +16,20 @@ An diesem Skript dürfen ohne Genehmigung von Achimobil oder braeven keine Ände
 0.1.3.0 - 27.05.2023 - Add support for manure heaps and husbandaries
 0.1.3.0 - 28.05.2023 - Add support for multiple columns for the display area
 0.1.4.0 - 11.06.2023 - Make reconnect when current display target is sold
+0.1.4.1 - 31.01.2024 - Prevent reconnect on game exit
 ]]
 
 BigDisplaySpecialization = {
-    Version = "0.1.3.0",
+    Version = "0.1.4.1",
     Name = "BigDisplaySpecialization",
     displays = {}
 }
-print(g_currentModName .. " - init " .. BigDisplaySpecialization.Name .. "(Version: " .. BigDisplaySpecialization.Version .. ")");
+
+function BigDisplaySpecialization.info(infoMessage, ...)
+	Logging.info(g_currentModName .. " - " .. infoMessage, ...);
+end
+
+BigDisplaySpecialization.info("init %s(Version: %s)", BigDisplaySpecialization.Name, BigDisplaySpecialization.Version);
 
 function BigDisplaySpecialization.prerequisitesPresent(specializations)
     return true;
@@ -252,14 +258,14 @@ function BigDisplaySpecialization:reconnectToStorage(savegame)
 	end
     
     if currentLoadingStation == nil then
-        print("no Loading Station found");
+		BigDisplaySpecialization.info("no Loading Station found");
         return;
     end
 
     spec.loadingStationToUse = currentLoadingStation;
     self:updateDisplayData();
     
--- print("spec.loadingStationToUse")
+-- BigDisplaySpecialization.info("spec.loadingStationToUse")
 -- DebugUtil.printTableRecursively(spec.loadingStationToUse,"_",0,2)
 
     -- farben festlegen. Input, output oder beides?
@@ -310,6 +316,12 @@ function BigDisplaySpecialization:reconnectToStorage(savegame)
 end
 
 function BigDisplaySpecialization:onStationDeleted(station)
+	
+    if g_currentMission.isExitingGame == nil then
+		BigDisplaySpecialization.info("Exiting game, prevent reconnect on station delete");
+        return;
+    end
+	
 	self:reconnectToStorage();
 end
 
@@ -318,7 +330,7 @@ function BigDisplaySpecialization:onDelete()
 end
 
 function BigDisplaySpecialization:getDistance(loadingStation, x, y, z)
--- print("placable")
+-- BigDisplaySpecialization.info("placable")
 -- DebugUtil.printTableRecursively(placable,"_",0,2)
 	if loadingStation ~= nil then
 		local tx, ty, tz = getWorldTranslation(loadingStation.rootNode)
