@@ -9,7 +9,7 @@
     </title>
     <description>
         <de>
-            <![CDATA[Digitalanzeige für die nächste Produktion, Mithaufen, Tierställen oder das Lager.
+            <![CDATA[Digitalanzeige für die nächste Produktion, Mithaufen, Tierställen (nur wenn diese ein Lager haben wie z.B. Wasser oder Gülle) oder das Lager (keine Objektlager).
 Zeigt alle Inhalte alphabetisch (lua) sortiert an.
 Automatische Paging bei vielen Inhalten.
 
@@ -100,8 +100,8 @@ next version
             <cz>Univerzální displej (%s Řádky)</cz>
         </text>
         <text name="function_unversalDisplay"> 
-            <de>Digitalanzeige für die nächste Produktion oder das Lager. Zeigt alle Inhalte alphabetisch (lua) sortiert an. Automatische Paging bei vielen Inhalten.</de>
-            <en>Digital display for the next production or warehouse. Displays all content sorted alphabetically (lua). Automatic paging when there is a lot of content.</en>
+            <de>Digitalanzeige für die nächste Produktion oder das Lager (keine Objektlager). Zeigt alle Inhalte alphabetisch (lua) sortiert an. Automatische Paging bei vielen Inhalten.</de>
+            <en>Digital display for the next production or warehouse (no object storages). Displays all content sorted alphabetically (lua). Automatic paging when there is a lot of content.</en>
             <ru>Цифровой дисплей для ближайшего производства или склада. Отображает всё содержимое, отсортированное в алфавитном порядке. Автоматическая прокрутка для длинного списка.</ru>
             <cz>Digitální displej pro další výrobu nebo sklad. Zobrazuje veškerý obsah seřazený podle abecedy (lua). Automatické stránkování při velkém množství obsahu.</cz>
         </text>
