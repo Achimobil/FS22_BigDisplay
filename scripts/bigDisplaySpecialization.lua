@@ -17,16 +17,19 @@ An diesem Skript dürfen ohne Genehmigung von Achimobil oder braeven keine Ände
 0.1.3.0 - 28.05.2023 - Add support for multiple columns for the display area
 0.1.4.0 - 11.06.2023 - Make reconnect when current display target is sold
 0.1.4.1 - 31.01.2024 - Prevent reconnect on game exit
+0.1.4.2 - 04.02.2024 - Change Use of nod name
 ]]
 
 BigDisplaySpecialization = {
-    Version = "0.1.4.1",
+    Version = "0.1.4.2",
     Name = "BigDisplaySpecialization",
     displays = {}
 }
 
+BigDisplaySpecialization.modName = g_currentModName;
+
 function BigDisplaySpecialization.info(infoMessage, ...)
-	Logging.info(g_currentModName .. " - " .. infoMessage, ...);
+	Logging.info(BigDisplaySpecialization.modName .. " - " .. infoMessage, ...);
 end
 
 BigDisplaySpecialization.info("init %s(Version: %s)", BigDisplaySpecialization.Name, BigDisplaySpecialization.Version);

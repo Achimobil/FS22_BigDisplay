@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="79">
     <author>Achimobil</author>
-    <version>1.0.0.1</version>
+    <version>1.0.0.2</version>
     <title>
         <de>Digitalanzeigen</de>
         <en>Digital Display</en>
@@ -32,10 +32,11 @@ Upload auf anderen Seiten nur durch mich selbst, Verlinkung nur mit Original Dow
 Das verändern oder erneutes hochladen, ob ganz oder in Teilen ist nicht gestattet!
 
 Changelog
+1.0.0.2 - Fehler beim auslesen des Mod namens behoben
 1.0.0.1 
-- CZ übersetzungen hinzugefügt
+- CZ Übersetzungen hinzugefügt
 - Beschreibung korrigiert
-- Fehler beim beenden des Spiels gehoben
+- Fehler beim beenden des Spiels behoben
 
 ]]>
         </de>
