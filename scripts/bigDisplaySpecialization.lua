@@ -125,7 +125,7 @@ function BigDisplaySpecialization:onLoad(savegame)
         bigDisplay.lastPageTime = 0;
         bigDisplay.nodeId = upperLeftNode;
         bigDisplay.textDrawDistance = 30;
-        bigDisplay.enmptyFilltypes = emptyFilltypes;
+        bigDisplay.emptyFilltypes = emptyFilltypes;
         bigDisplay.columns = columns;
 		
 		-- breite pro Spalte berechnen
@@ -370,11 +370,11 @@ function BigDisplaySpecialization:updateDisplayData()
             local myFillLevel = Utils.getNoNil(fillLevel, 0);
             lineInfo.fillLevel = g_i18n:formatNumber(myFillLevel, 0);
 			
-			if bigDisplay.enmptyFilltypes then
+			if bigDisplay.emptyFilltypes then
 				table.insert(bigDisplay.lineInfos, lineInfo);
 			else
 				-- erst mal nur anzeigen wo auch was da ist?
-				if(myFillLevel ~= 0) then 
+				if(myFillLevel >= 1) then 
 					table.insert(bigDisplay.lineInfos, lineInfo);
 				end 
 			end
