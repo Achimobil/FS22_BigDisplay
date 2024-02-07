@@ -20,10 +20,11 @@ An diesem Skript dürfen ohne Genehmigung von Achimobil oder braeven keine Ände
 0.1.4.2 - 04.02.2024 - Change Use of nod name
 0.1.4.3 - 07.02.2024 - remove entries below 1 from display
 0.1.4.4 - 07.02.2024 - Make a break in processing storage for better performance
+0.1.4.5 - 07.02.2024 - Read out info from robot when main storage is updated
 ]]
 
 BigDisplaySpecialization = {
-    Version = "0.1.4.3",
+    Version = "0.1.4.5",
     Name = "BigDisplaySpecialization",
     displays = {}
 }
@@ -325,6 +326,8 @@ function BigDisplaySpecialization:reconnectToStorage(savegame)
     end
 	
 	spec.loadingStationToUse:addDeleteListener(self, "onStationDeleted")
+	
+	BigDisplaySpecialization.devInfo("Connected to %s", spec.loadingStationToUse:getName());
 end
 
 function BigDisplaySpecialization:onStationDeleted(station)
@@ -427,6 +430,14 @@ function BigDisplaySpecialization:getAllFillLevels(station, farmId)
 	if station.owningPlaceable ~= nil and station.owningPlaceable.spec_husbandryFood ~= nil then
 		for fillType, fillLevel in pairs(station.owningPlaceable.spec_husbandryFood.fillLevels) do
 			fillLevels[fillType] = Utils.getNoNil(fillLevels[fillType], 0) + fillLevel;
+		end
+	end
+	
+	-- inhalt von Robotern einfügen
+	if station.owningPlaceable ~= nil and station.owningPlaceable.spec_husbandryFeedingRobot ~= nil then
+		for fillType, _ in pairs(station.owningPlaceable.spec_husbandryFeedingRobot.feedingRobot.fillTypeToUnloadingSpot) do
+			local fillLevel = station.owningPlaceable.spec_husbandryFeedingRobot.feedingRobot:getFillLevel(fillType);
+			fillLevels[fillType] = Utils.getNoNil(fillLevels[fillType], 0) + fillLevel
 		end
 	end
 
