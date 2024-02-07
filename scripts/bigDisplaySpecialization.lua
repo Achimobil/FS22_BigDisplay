@@ -18,10 +18,12 @@ An diesem Skript dürfen ohne Genehmigung von Achimobil oder braeven keine Ände
 0.1.4.0 - 11.06.2023 - Make reconnect when current display target is sold
 0.1.4.1 - 31.01.2024 - Prevent reconnect on game exit
 0.1.4.2 - 04.02.2024 - Change Use of nod name
+0.1.4.3 - 07.02.2024 - remove entries below 1 from display
+0.1.4.4 - 07.02.2024 - Make a break in processing storage for better performance
 ]]
 
 BigDisplaySpecialization = {
-    Version = "0.1.4.2",
+    Version = "0.1.4.3",
     Name = "BigDisplaySpecialization",
     displays = {}
 }
@@ -30,6 +32,10 @@ BigDisplaySpecialization.modName = g_currentModName;
 
 function BigDisplaySpecialization.info(infoMessage, ...)
 	Logging.info(BigDisplaySpecialization.modName .. " - " .. infoMessage, ...);
+end
+
+function BigDisplaySpecialization.devInfo(infoMessage, ...)
+	Logging.devInfo(BigDisplaySpecialization.modName .. " - " .. infoMessage, ...);
 end
 
 BigDisplaySpecialization.info("init %s(Version: %s)", BigDisplaySpecialization.Name, BigDisplaySpecialization.Version);
@@ -79,6 +85,9 @@ function BigDisplaySpecialization:onLoad(savegame)
     
     spec.bigDisplays = {};
     spec.changedColors = {}
+	spec.updateDisplaysRunning = false;
+	spec.updateDisplaysRequested = false;
+	spec.updateDisplaysDtSinceLastTime = 9999;
     local i = 0;
 
     while true do
@@ -354,13 +363,26 @@ function BigDisplaySpecialization:updateDisplayData()
     if spec == nil or spec.loadingStationToUse == nil then 
         return;
     end
-    
+	
+	-- only one time read at a time for more performance
+	if spec.updateDisplaysRunning then 
+		return 
+	else
+		if spec.updateDisplaysDtSinceLastTime <= 500 then
+			spec.updateDisplaysRequested = true;
+			return;
+		end
+	end
+	spec.updateDisplaysRunning = true;
+			
+    BigDisplaySpecialization.devInfo("updateDisplayData")
+	
     local farmId = self:getOwnerFarmId();
   
     for _, bigDisplay in pairs(spec.bigDisplays) do
         -- in jede line schreiben, was angezeigt werden soll
         -- hier eventuell filtern anhand von xml einstellungen?
-        -- möglich per filltype liste fstzulegen was in welcher reihenfolge angezeigt wird, sinnvoll?
+        -- möglich per filltype liste festzulegen was in welcher reihenfolge angezeigt wird, sinnvoll?
         -- sortieren per XML einstellung?
         bigDisplay.lineInfos = {};
         for fillTypeId, fillLevel in pairs(BigDisplaySpecialization:getAllFillLevels(spec.loadingStationToUse, farmId)) do
@@ -383,7 +405,9 @@ function BigDisplaySpecialization:updateDisplayData()
         table.sort(bigDisplay.lineInfos,compLineInfos)
     end
     
-    local line = 1;
+    spec.updateDisplaysRunning = false;
+	spec.updateDisplaysRequested = false;
+	spec.updateDisplaysDtSinceLastTime = 0;
 end
 
 function BigDisplaySpecialization:getAllFillLevels(station, farmId)
@@ -422,6 +446,11 @@ function BigDisplaySpecialization:updateDisplays(dt)
     if not self.isClient then 
         return;
     end
+	
+	spec.updateDisplaysDtSinceLastTime = spec.updateDisplaysDtSinceLastTime + dt;
+	if spec.updateDisplaysRequested then
+		self:updateDisplayData();
+	end
     
     setTextVerticalAlignment(RenderText.VERTICAL_ALIGN_BASELINE)
     
