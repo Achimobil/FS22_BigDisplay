@@ -21,10 +21,11 @@ An diesem Skript dürfen ohne Genehmigung von Achimobil oder braeven keine Ände
 0.1.4.3 - 07.02.2024 - remove entries below 1 from display
 0.1.4.4 - 07.02.2024 - Make a break in processing storage for better performance
 0.1.4.5 - 07.02.2024 - Read out info from robot when main storage is updated
+0.1.4.6 - 07.02.2024 - fix for game exit
 ]]
 
 BigDisplaySpecialization = {
-    Version = "0.1.4.5",
+    Version = "0.1.4.6",
     Name = "BigDisplaySpecialization",
     displays = {}
 }
@@ -332,7 +333,7 @@ end
 
 function BigDisplaySpecialization:onStationDeleted(station)
 	
-    if g_currentMission.isExitingGame == nil then
+    if g_currentMission.isExitingGame == true then
 		BigDisplaySpecialization.info("Exiting game, prevent reconnect on station delete");
         return;
     end
