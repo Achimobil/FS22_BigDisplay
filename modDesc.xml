@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <modDesc descVersion="79">
     <author>Achimobil</author>
-    <version>1.0.0.6</version>
+    <version>1.1.0.0</version>
     <title>
         <de>Digitalanzeigen</de>
         <en>Digital Display</en>
-        <cz>Digitální displej</cz>
+        <cz>Digitální Displej</cz>
         <ru>Цифровые Дисплеи</ru>
     </title>
     <description>
@@ -33,15 +33,14 @@ Upload auf anderen Seiten nur durch mich selbst, Verlinkung nur mit Original Dow
 Das verändern oder erneutes hochladen, ob ganz oder in Teilen ist nicht gestattet!
 
 Changelog
-1.0.0.5 - Fix für fehler beim Spiel beenden.
-1.0.0.5 - Info vom Roboter werden jetzt angezeigt. Allerdings nicht immer korrekt.
-1.0.0.4 - Verzögerte Verarbeitung zur Verbesserung der Performance bei großen Lagern (0,5 Sekunden)
-1.0.0.3 - Inhalte unter 1 Liter werden jetzt nicht mehr angezeigt
-1.0.0.2 - Fehler beim auslesen des Mod namens behoben
-1.0.0.1 
+1.1.0.0
+- Fix für Lua Fehler beim Spiel beenden.
+- Info vom Roboter werden jetzt angezeigt. Allerdings nicht immer korrekt.
+- Verzögerte Verarbeitung zur Verbesserung der Performance bei großen Lagern (0,5 Sekunden)
+- Inhalte unter 1 Liter werden jetzt nicht mehr angezeigt
+- Fehler beim auslesen des Mod namens behoben
 - CZ Übersetzungen hinzugefügt
 - Beschreibung korrigiert
-- Fehler beim beenden des Spiels behoben
 
 ]]>
         </de>
@@ -67,9 +66,16 @@ Please report bugs or suggestions for improvement on <a href="https://github.com
 Upload on other sites only by myself, linking only with original download link. NO substitute link!
 Modifying and re-uploading in whole or in part is not allowed!
 
-Changelog 
-next version
-- Added CZ translations]]>
+
+Changelog
+1.1.0.0
+- Fix for Lua error when exiting the game.
+- Info from the robot is now displayed. However, not always correct.
+- Delayed processing to improve performance for large warehouses (0.5 seconds)
+- Contents under 1 litre are no longer displayed
+- Fixed error when reading the mod name
+- CZ translations added
+- Description corrected]]>
         </en>
     </description>
     <multiplayer supported="true"/>
