@@ -43,7 +43,7 @@ Changelog
 - Beschreibung korrigiert
 
 ]]>
-        </de>
+        </de>      
         <en>
             <![CDATA[Digital display for the next production or warehouse.
 Displays all content sorted alphabetically (lua).
@@ -77,6 +77,38 @@ Changelog
 - CZ translations added
 - Description corrected]]>
         </en>
+        <it>
+            <![CDATADisplay digitale per la prossima produzione o magazzino.
+Visualizza tutti i contenuti in ordine alfabetico (lua).
+Impaginazione automatica quando c'è molto contenuto.
+
+Quando il gioco inizia, il display cerca il bersaglio più vicino da visualizzare.
+Quindi se qualcosa viene posizionato più vicino o eliminato, il display mostrerà comunque il vecchio valore.
+
+Incluso un robusto display stand e diversi display da parete con display da 3 a 26 linee.
+Inoltre, c'è un display da parete a 26 linee con doppia larghezza e quindi 52 contenuti visualizzabili.
+Per i display da parete è incluso anche un palo, se l'edificio non ha un'area adatta per il posizionamento.
+I display da parete e il palo hanno una scelta di colori.
+
+Prezzo per display: da 3.000$ a 20.000$
+Manutenzione al mese: 5$
+Prezzo per palo: 250$
+
+Segnala bug o suggerimenti per il miglioramento su <a href="https://github.com/Achimobil/FS22_BigDisplay">Github</a>.
+
+Carica su altri siti solo da me, collegando solo con il link di download originale. NESSUN link sostitutivo!
+Non è consentito modificare e ricaricare in tutto o in parte!
+
+Changelog
+1.1.0.0
+- Correzione per errore Lua quando si esce dal gioco.
+- Ora vengono visualizzate le informazioni dal robot. Tuttavia, non sempre corrette.
+- Elaborazione ritardata per migliorare le prestazioni per grandi magazzini (0,5 secondi)
+- I contenuti inferiori a 1 litro non vengono più visualizzati
+- Corretto errore durante la lettura del nome della mod
+- Aggiunte traduzioni CZ
+- Descrizione corretta]]>
+        </it>
     </description>
     <multiplayer supported="true"/>
     <iconFilename>icon_bigDisplay.dds</iconFilename>
@@ -113,30 +145,35 @@ Changelog
             <en>Universal Display (%s Lines)</en>
             <ru>Универсальный дисплей (%s Строк)</ru>
             <cz>Univerzální displej (%s Řádky)</cz>
+            <it>Visualizzazione universale (%s linee)</it>            
         </text>
         <text name="function_unversalDisplay"> 
             <de>Digitalanzeige für die nächste Produktion oder das Lager (keine Objektlager). Zeigt alle Inhalte alphabetisch (lua) sortiert an. Automatische Paging bei vielen Inhalten.</de>
             <en>Digital display for the next production or warehouse (no object storages). Displays all content sorted alphabetically (lua). Automatic paging when there is a lot of content.</en>
             <ru>Цифровой дисплей для ближайшего производства или склада. Отображает всё содержимое, отсортированное в алфавитном порядке. Автоматическая прокрутка для длинного списка.</ru>
             <cz>Digitální displej pro další výrobu nebo sklad. Zobrazuje veškerý obsah seřazený podle abecedy (lua). Automatické stránkování při velkém množství obsahu.</cz>
+            <it>Display digitale per la prossima produzione o magazzino (nessun oggetto di stoccaggio). Visualizza tutti i contenuti ordinati alfabeticamente (lua). Paginazione automatica quando c'è molto contenuto.</it>  
         </text>
         <text name="bigDisplay_connected_with"> 
             <de>Verbundenn mit</de>
             <en>Connected with</en>
             <ru>Подключён к</ru>
             <cz>Spojeno s</cz>
+            <it>Connesso</it>  
         </text>
         <text name="storeItem_displayStand"> 
             <de>Mast für die Wanddisplays</de>
             <en>Mast for the wall displays</en>
             <ru>Столб для дисплеев</ru>
             <cz>Stojan pro nástěnné displeje</cz>
+            <it>Albero per espositori da parete</it>  
         </text>
         <text name="function_displayStand"> 
             <de>An diesen Mast können die Wanddisplays angebracht werden, wenn keine Fläche am Gebäude geeignet ist</de>
             <en>The wall displays can be attached to this mast if there is no suitable surface on the building.</en>
             <ru>Дисплеи могут быть закреплены на этом столбе, если на здании нет подходящей поверхности.</ru>
             <cz>Pokud na budově není vhodná plocha, lze na tento stojan připevnit nástěnné displeje.</cz>
+            <it>Se nell'edificio non è presente una superficie adatta, è possibile fissare gli espositori da parete a questo palo.</it>  
         </text>
     </l10n>
 </modDesc>
